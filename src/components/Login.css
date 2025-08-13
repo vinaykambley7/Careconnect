@@ -1,0 +1,107 @@
+/* Login.css - Dark Theme */
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #0f172a; /* Dark blue background */
+}
+
+.login-box {
+  background: #1e293b; /* Darker blue container */
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  width: 360px;
+  border: 1px solid #334155; /* Border color */
+}
+
+.login-box h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff; /* White text */
+}
+
+.login-box label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #e2e8f0; /* Light gray text */
+}
+
+.login-box select,
+.login-box input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 20px;
+  border: 1px solid #475569;
+  border-radius: 6px;
+  font-size: 16px;
+  background-color: #1e293b;
+  color: #ffffff; /* White text */
+  transition: border-color 0.3s ease;
+}
+
+.login-box select:focus,
+.login-box input:focus {
+  outline: none;
+  border-color: #3b82f6; /* Blue focus border */
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.login-box button {
+  width: 100%;
+  padding: 12px 0;
+  background-color: #2563eb; /* Blue button */
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 16px;
+}
+.login-logo{
+    display: block;
+  margin: 0 auto 20px auto;
+  max-width: 180px;
+  height: auto;
+  border-radius: 12px;
+}
+.login-box button:hover {
+  background-color: #1d4ed8; /* Darker blue on hover */
+  transform: translateY(-1px);
+}
+
+.login-box button:active {
+  transform: translateY(0);
+}
+
+.error-msg {
+  color: #f87171; /* Light red error text */
+  margin-bottom: 16px;
+  font-weight: 600;
+  text-align: center;
+  background-color: rgba(220, 38, 38, 0.1);
+  padding: 8px;
+  border-radius: 4px;
+  border-left: 3px solid #dc2626;
+}
+
+/* Placeholder text color */
+.login-box input::placeholder {
+  color: #94a3b8; /* Light gray placeholder */
+  opacity: 1;
+}
+
+/* Dropdown arrow color */
+.login-box select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%94a3b8'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+}
