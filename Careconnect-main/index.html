@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CareConnect - Hospital Management System</title>
+    <link rel="icon" type="image/png" href="https://res.cloudinary.com/dmy7kknrc/image/upload/v1755050942/Care_Connect_n28xvw.png" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- ====================================================================
+         1. LOGIN VIEW SCREEN
+         ==================================================================== -->
+    <div id="loginView" class="login-wrapper">
+      <div class="login-card">
+        <!-- Logo & Branding -->
+        <div class="login-brand">
+          <img
+            src="https://res.cloudinary.com/dmy7kknrc/image/upload/v1755050942/Care_Connect_n28xvw.png"
+            alt="CareConnect Logo"
+            class="login-logo"
+            onerror="this.style.display='none'"
+          />
+          <h1>CareConnect</h1>
+          <p>Hospital & Clinical Management Portal</p>
+        </div>
+
+        <!-- 1-Click Easy Login Section -->
+        <div class="easy-login-box">
+          <div class="easy-header">
+            <span>⚡</span>
+            <span>1-Click Quick Demo Login</span>
+          </div>
+
+          <div class="easy-grid">
+            <button type="button" class="quick-user-btn" onclick="quickLogin('reception1')">
+              <span class="quick-avatar">👩‍💼</span>
+              <div class="quick-text">
+                <span class="quick-name">Sarah Jenkins</span>
+                <span class="quick-role" style="color: #3b82f6;">Receptionist</span>
+              </div>
+            </button>
+
+            <button type="button" class="quick-user-btn" onclick="quickLogin('doctor1')">
+              <span class="quick-avatar">👨‍⚕️</span>
+              <div class="quick-text">
+                <span class="quick-name">Dr. Rajesh Sharma</span>
+                <span class="quick-role" style="color: #10b981;">Doctor 1</span>
+              </div>
+            </button>
+
+            <button type="button" class="quick-user-btn" onclick="quickLogin('doctor2')">
+              <span class="quick-avatar">👩‍⚕️</span>
+              <div class="quick-text">
+                <span class="quick-name">Dr. Ananya Patel</span>
+                <span class="quick-role" style="color: #8b5cf6;">Doctor 2</span>
+              </div>
+            </button>
+
+            <button type="button" class="quick-user-btn" onclick="quickLogin('pharma1')">
+              <span class="quick-avatar">💊</span>
+              <div class="quick-text">
+                <span class="quick-name">Alex Rivera</span>
+                <span class="quick-role" style="color: #f59e0b;">Pharmacist</span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <div class="login-divider">
+          <span>OR SIGN IN MANUALLY</span>
+        </div>
+
+        <!-- Manual Login Form -->
+        <form id="manualLoginForm" class="login-form" onsubmit="handleManualLogin(event)">
+          <div id="loginErrorAlert" class="error-alert" style="display: none;"></div>
+
+          <div class="form-group">
+            <label for="loginRole">Select Department Role</label>
+            <select id="loginRole" class="input-control">
+              <option value="Receptionist">Receptionist (Front Desk)</option>
+              <option value="Doctor">Doctor (Consultation)</option>
+              <option value="Pharmacist">Pharmacist (Dispensary)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="loginUsername">Username</label>
+            <input
+              type="text"
+              id="loginUsername"
+              class="input-control"
+              placeholder="e.g. reception1, doctor1, pharma1"
+              autocomplete="username"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <div class="pwd-box">
+              <input
+                type="password"
+                id="loginPassword"
+                class="input-control"
+                placeholder="Enter password (default: 1234)"
+                autocomplete="current-password"
+                required
+              />
+              <button type="button" id="togglePwdBtn" class="toggle-pwd" onclick="togglePasswordVisibility()">
+                Show
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary" style="margin-top: 6px;">
+            Sign In to Dashboard
+          </button>
+        </form>
+
+        <!-- Credentials Helper Chips -->
+        <div class="demo-chips-box">
+          <span>Demo Credentials:</span>
+          <div class="chips-list">
+            <code>reception1 / 1234</code>
+            <code>doctor1 / 1234</code>
+            <code>doctor2 / 1234</code>
+            <code>pharma1 / 1234</code>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         2. AUTHENTICATED APP SCREEN
+         ==================================================================== -->
+    <div id="appView" style="display: none;">
+      <!-- Header Navigation Bar -->
+      <header class="app-header">
+        <div class="header-left">
+          <div class="brand-wrapper" onclick="switchTab('desk')">
+            <img
+              src="https://res.cloudinary.com/dmy7kknrc/image/upload/v1755050942/Care_Connect_n28xvw.png"
+              alt="CareConnect Logo"
+              class="brand-logo-small"
+              onerror="this.style.display='none'"
+            />
+            <span class="brand-title">CareConnect</span>
+            <span class="system-tag">HMS</span>
+          </div>
+
+          <nav class="nav-tabs">
+            <button id="tabDesk" class="tab-btn active" onclick="switchTab('desk')">
+              📊 Desk
+            </button>
+            <button id="tabReports" class="tab-btn" onclick="switchTab('reports')">
+              📈 Reports & Analytics
+            </button>
+          </nav>
+        </div>
+
+        <div class="header-right">
+          <!-- User Profile Capsule -->
+          <div class="user-capsule">
+            <span id="userAvatarSmall" class="user-cap-avatar">👤</span>
+            <div class="user-cap-info">
+              <span id="userDisplayName" class="user-cap-name">Staff User</span>
+              <span id="userRoleTag" class="user-cap-role">Role</span>
+            </div>
+          </div>
+
+          <button class="btn-logout" onclick="logout()" title="Sign out of CareConnect">
+            🚪 Logout
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Dynamic Content -->
+      <main>
+        <section id="deskSection"></section>
+        <section id="reportsSection" style="display: none;"></section>
+      </main>
+    </div>
+
+    <!-- Pure Vanilla JS -->
+    <script src="js/app.js"></script>
+  </body>
+</html>

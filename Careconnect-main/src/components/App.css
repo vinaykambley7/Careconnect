@@ -1,0 +1,18 @@
+/* Default style for buttons */
+.top-bar-btn {
+  padding: 8px 14px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Make them smaller for small devices */
+@media (max-width: 600px) {
+  .top-bar-btn {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}
