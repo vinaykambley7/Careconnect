@@ -134,28 +134,31 @@ button, input, select, textarea {
 .toast.info { background: #0b1f38; color: #5eead4; border: 1.5px solid #0d9488; }
 
 /* ==========================================================================
-   RICH HOSPITAL LOGIN PORTAL (VIBRANT CLINICAL HERO)
+   RICH HOSPITAL LOGIN PORTAL (HORIZONTAL EXECUTIVE WORKSTATION)
    ========================================================================== */
 .login-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 36px 16px;
+  padding: 24px 20px;
   background: linear-gradient(135deg, #071526 0%, #0b2545 45%, #0f4c5c 80%, #0d9488 100%);
   position: relative;
+  box-sizing: border-box;
 }
 
 .login-card {
   background: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--radius-lg);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
-  padding: 36px 32px;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.1);
   width: 100%;
-  max-width: 490px;
+  max-width: 980px;
   position: relative;
   overflow: hidden;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  box-sizing: border-box;
 }
 
 .login-card::before {
@@ -166,82 +169,77 @@ button, input, select, textarea {
   right: 0;
   height: 5px;
   background: linear-gradient(90deg, #0d9488 0%, #0284c7 50%, #7c3aed 100%);
+  z-index: 2;
 }
 
-.login-brand {
-  text-align: center;
-  margin-bottom: 22px;
+/* Left Panel: Hospital Branding & 1-Click Fast Access */
+.login-panel-left {
+  padding: 26px 26px;
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+  border-right: 1.5px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
 }
 
-.login-logo {
-  max-width: 130px;
-  height: auto;
-  max-height: 60px;
-  object-fit: contain;
-  margin-bottom: 8px;
-  border-radius: var(--radius-sm);
-  filter: drop-shadow(0 4px 10px rgba(11, 31, 56, 0.15));
-}
-
-.brand-crest {
-  width: 56px;
-  height: 56px;
-  margin: 0 auto 12px auto;
-  background: linear-gradient(135deg, #0d9488 0%, #0284c7 100%);
-  border-radius: var(--radius-md);
+.login-brand-horizontal {
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  box-shadow: 0 8px 20px rgba(13, 148, 136, 0.35);
+  gap: 14px;
 }
 
-.brand-crest svg {
-  width: 30px;
-  height: 30px;
-  fill: currentColor;
+.login-brand-horizontal .login-logo {
+  max-width: 95px;
+  max-height: 48px;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 0;
+  border-radius: var(--radius-xs);
+  filter: drop-shadow(0 3px 6px rgba(11, 31, 56, 0.15));
 }
 
-.login-brand h1 {
-  font-size: 26px;
+.login-brand-horizontal .brand-text h1 {
+  font-size: 21px;
   font-weight: 800;
   color: #0b1f38;
   letter-spacing: -0.02em;
-  margin-bottom: 3px;
+  margin: 0;
+  line-height: 1.2;
 }
 
-.login-brand p {
-  font-size: 12px;
+.login-brand-horizontal .brand-text p {
+  font-size: 10.5px;
   color: #0d9488;
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  margin: 2px 0 0 0;
 }
 
-/* 1-Click Fast Access Staff Cards with Distinct Color Borders */
 .easy-login-box {
-  background: #f8fafc;
+  background: #ffffff;
   border: 1.5px solid #e2e8f0;
   border-radius: var(--radius-md);
-  padding: 16px;
-  margin-bottom: 20px;
+  padding: 12px 14px;
+  box-shadow: var(--shadow-sm);
 }
 
 .easy-header {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: #0f766e;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .easy-header svg {
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
   stroke: #0d9488;
   fill: none;
 }
@@ -249,64 +247,44 @@ button, input, select, textarea {
 .easy-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 8px;
 }
 
 .quick-user-btn {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   background: #ffffff;
   border: 1.5px solid #e2e8f0;
   border-left-width: 4px;
   border-radius: var(--radius-sm);
-  padding: 10px 12px;
+  padding: 7px 10px;
   text-align: left;
   cursor: pointer;
   transition: all 0.15s ease;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .quick-user-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(11, 31, 56, 0.12);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(11, 31, 56, 0.1);
 }
 
-.quick-user-btn.reception-btn {
-  border-left-color: #0d9488;
-}
-.quick-user-btn.reception-btn:hover {
-  background: #f0fdfa;
-  border-color: #0d9488;
-}
+.quick-user-btn.reception-btn { border-left-color: #0d9488; }
+.quick-user-btn.reception-btn:hover { background: #f0fdfa; border-color: #0d9488; }
 
-.quick-user-btn.cardio-btn {
-  border-left-color: #0284c7;
-}
-.quick-user-btn.cardio-btn:hover {
-  background: #f0f9ff;
-  border-color: #0284c7;
-}
+.quick-user-btn.cardio-btn { border-left-color: #0284c7; }
+.quick-user-btn.cardio-btn:hover { background: #f0f9ff; border-color: #0284c7; }
 
-.quick-user-btn.med-btn {
-  border-left-color: #7c3aed;
-}
-.quick-user-btn.med-btn:hover {
-  background: #f5f3ff;
-  border-color: #7c3aed;
-}
+.quick-user-btn.med-btn { border-left-color: #7c3aed; }
+.quick-user-btn.med-btn:hover { background: #f5f3ff; border-color: #7c3aed; }
 
-.quick-user-btn.pharma-btn {
-  border-left-color: #059669;
-}
-.quick-user-btn.pharma-btn:hover {
-  background: #ecfdf5;
-  border-color: #059669;
-}
+.quick-user-btn.pharma-btn { border-left-color: #059669; }
+.quick-user-btn.pharma-btn:hover { background: #ecfdf5; border-color: #059669; }
 
 .quick-avatar {
-  width: 34px;
-  height: 34px;
+  width: 30px;
+  height: 30px;
   border-radius: var(--radius-full);
   display: flex;
   align-items: center;
@@ -321,8 +299,8 @@ button, input, select, textarea {
 .quick-avatar.green { background: #059669; }
 
 .quick-avatar svg {
-  width: 18px;
-  height: 18px;
+  width: 15px;
+  height: 15px;
   fill: currentColor;
 }
 
@@ -330,10 +308,11 @@ button, input, select, textarea {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  min-width: 0;
 }
 
 .quick-name {
-  font-size: 12.5px;
+  font-size: 11.5px;
   font-weight: 700;
   color: #0b1f38;
   white-space: nowrap;
@@ -342,47 +321,72 @@ button, input, select, textarea {
 }
 
 .quick-role {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.login-divider {
+.login-footer-badge {
   display: flex;
   align-items: center;
-  text-align: center;
-  margin: 18px 0;
-  color: #64748b;
+  gap: 7px;
   font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  font-weight: 600;
+  color: #047857;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  padding: 5px 10px;
+  border-radius: var(--radius-full);
+  width: fit-content;
 }
 
-.login-divider::before,
-.login-divider::after {
-  content: '';
-  flex: 1;
-  border-bottom: 1.5px solid #e2e8f0;
+/* Right Panel: Manual Login Form & Credentials */
+.login-panel-right {
+  padding: 26px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  background: #ffffff;
 }
 
-.login-divider span {
-  padding: 0 10px;
+.login-right-header h3 {
+  font-size: 17.5px;
+  font-weight: 800;
+  color: #0b1f38;
+  margin: 0 0 2px 0;
+  letter-spacing: -0.01em;
 }
 
-/* Form Styles */
+.login-right-header p {
+  font-size: 11.5px;
+  color: #64748b;
+  margin: 0;
+  font-weight: 500;
+}
+
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 13px;
+  gap: 10px;
+}
+
+.form-row-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
 }
 
 .form-group label {
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 700;
   color: #1e293b;
   letter-spacing: 0.01em;
@@ -390,15 +394,16 @@ button, input, select, textarea {
 
 .input-control {
   width: 100%;
-  padding: 9px 12px;
+  padding: 8px 11px;
   background-color: #ffffff;
   border: 1.5px solid #cbd5e1;
   border-radius: var(--radius-sm);
   color: #0f172a;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 500;
   transition: all 0.15s ease;
   outline: none;
+  box-sizing: border-box;
 }
 
 .input-control:focus {
@@ -413,19 +418,19 @@ button, input, select, textarea {
 }
 
 .pwd-box .input-control {
-  padding-right: 60px;
+  padding-right: 54px;
 }
 
 .toggle-pwd {
   position: absolute;
-  right: 10px;
+  right: 8px;
   background: transparent;
   border: none;
   color: #0d9488;
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 700;
   cursor: pointer;
-  padding: 4px 8px;
+  padding: 3px 6px;
   border-radius: var(--radius-xs);
 }
 
@@ -441,8 +446,8 @@ button, input, select, textarea {
   background: linear-gradient(135deg, #0d9488 0%, #0284c7 100%);
   color: #ffffff;
   font-weight: 700;
-  font-size: 14px;
-  padding: 11px 20px;
+  font-size: 13.5px;
+  padding: 9px 18px;
   border-radius: var(--radius-sm);
   border: none;
   cursor: pointer;
@@ -461,8 +466,8 @@ button, input, select, textarea {
 }
 
 .btn-primary svg {
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
   fill: currentColor;
 }
 
@@ -470,25 +475,25 @@ button, input, select, textarea {
   background-color: var(--badge-danger-bg);
   border: 1.5px solid var(--badge-danger-border);
   color: var(--badge-danger-text);
-  padding: 10px 12px;
+  padding: 8px 10px;
   border-radius: var(--radius-sm);
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 600;
 }
 
 .demo-chips-box {
-  margin-top: 18px;
-  padding-top: 14px;
+  margin-top: 6px;
+  padding-top: 8px;
   border-top: 1.5px solid #e2e8f0;
   text-align: center;
 }
 
 .demo-chips-box span {
-  font-size: 10.5px;
+  font-size: 10px;
   color: #64748b;
   font-weight: 700;
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -496,19 +501,42 @@ button, input, select, textarea {
 .chips-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 5px;
   justify-content: center;
 }
 
 .chips-list code {
   background: #f1f5f9;
   border: 1px solid #cbd5e1;
-  padding: 3px 8px;
+  padding: 2px 7px;
   border-radius: var(--radius-xs);
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
   color: #0b1f38;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+@media (max-width: 860px) {
+  .login-wrapper {
+    padding: 16px;
+    align-items: flex-start;
+  }
+  .login-card {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin: auto;
+  }
+  .login-panel-left {
+    border-right: none;
+    border-bottom: 1.5px solid #e2e8f0;
+    padding: 20px 18px;
+  }
+  .login-panel-right {
+    padding: 20px 18px;
+  }
+  .form-row-2col {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ==========================================================================

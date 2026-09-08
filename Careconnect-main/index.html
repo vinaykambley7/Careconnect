@@ -18,138 +18,159 @@
          1. HOSPITAL CLINICAL LOGIN PORTAL
          ==================================================================== -->
     <div id="loginView" class="login-wrapper">
-      <div class="login-card">
-        <!-- Hospital Branding & Logo -->
-        <div class="login-brand">
-          <img
-            src="images/logo.png"
-            alt="CareConnect Logo"
-            class="login-logo"
-            onerror="this.src='https://res.cloudinary.com/dmy7kknrc/image/upload/v1755050942/Care_Connect_n28xvw.png'"
-          />
-          <h1>CareConnect</h1>
-          <p>Health Information System • Clinical Staff Portal</p>
-        </div>
-
-        <!-- Authorized Clinical Staff Fast-Access -->
-        <div class="easy-login-box">
-          <div class="easy-header">
-            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            </svg>
-            <span>Authorized Staff — 1-Click Fast Access</span>
-          </div>
-
-          <div class="easy-grid">
-            <button type="button" class="quick-user-btn reception-btn" onclick="quickLogin('reception1')">
-              <div class="quick-avatar teal">
-                <svg viewBox="0 0 24 24">
-                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                </svg>
-              </div>
-              <div class="quick-text">
-                <span class="quick-name">Sarah Jenkins</span>
-                <span class="quick-role" style="color: #0d9488;">Front Desk Intake</span>
-              </div>
-            </button>
-
-            <button type="button" class="quick-user-btn cardio-btn" onclick="quickLogin('doctor1')">
-              <div class="quick-avatar blue">
-                <svg viewBox="0 0 24 24">
-                  <path d="M19 8h-2v3h-3v2h3v3h2v-3h3v-2h-3V8zm-7 4c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-1.5c0-2.33-4.67-3.5-7-3.5z"/>
-                </svg>
-              </div>
-              <div class="quick-text">
-                <span class="quick-name">Dr. Rajesh Sharma</span>
-                <span class="quick-role" style="color: #0284c7;">Cardiology (MD)</span>
-              </div>
-            </button>
-
-            <button type="button" class="quick-user-btn med-btn" onclick="quickLogin('doctor2')">
-              <div class="quick-avatar purple">
-                <svg viewBox="0 0 24 24">
-                  <path d="M19 8h-2v3h-3v2h3v3h2v-3h3v-2h-3V8zm-7 4c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-1.5c0-2.33-4.67-3.5-7-3.5z"/>
-                </svg>
-              </div>
-              <div class="quick-text">
-                <span class="quick-name">Dr. Ananya Patel</span>
-                <span class="quick-role" style="color: #7c3aed;">Medicine (MBBS)</span>
-              </div>
-            </button>
-
-            <button type="button" class="quick-user-btn pharma-btn" onclick="quickLogin('pharma1')">
-              <div class="quick-avatar green">
-                <svg viewBox="0 0 24 24">
-                  <path d="M4.5 10.5C3.67 10.5 3 11.17 3 12s.67 1.5 1.5 1.5h15c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5h-15z M10.5 4.5C10.5 3.67 11.17 3 12 3s1.5.67 1.5 1.5v15c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5v-15z"/>
-                </svg>
-              </div>
-              <div class="quick-text">
-                <span class="quick-name">Alex Rivera</span>
-                <span class="quick-role" style="color: #059669;">Lead Pharmacist</span>
-              </div>
-            </button>
-          </div>
-        </div>
-
-        <div class="login-divider">
-          <span>OR SIGN IN WITH CREDENTIALS</span>
-        </div>
-
-        <!-- Manual Login Form -->
-        <form id="manualLoginForm" class="login-form" onsubmit="handleManualLogin(event)">
-          <div id="loginErrorAlert" class="error-alert" style="display: none;"></div>
-
-          <div class="form-group">
-            <label for="loginRole">Clinical Department</label>
-            <select id="loginRole" class="input-control">
-              <option value="Receptionist">Receptionist (Patient Intake & Triage)</option>
-              <option value="Doctor">Doctor (Clinical Consultation)</option>
-              <option value="Pharmacist">Pharmacist (Hospital Dispensary)</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="loginUsername">Staff ID / Username</label>
-            <input
-              type="text"
-              id="loginUsername"
-              class="input-control"
-              placeholder="e.g. reception1, doctor1, pharma1"
-              autocomplete="username"
-              required
+      <div class="login-card login-card-horizontal">
+        <!-- Left Column: Hospital Branding & 1-Click Fast Access Staff -->
+        <div class="login-panel-left">
+          <div class="login-brand-horizontal">
+            <img
+              src="images/logo.png"
+              alt="CareConnect Logo"
+              class="login-logo"
+              onerror="this.src='https://res.cloudinary.com/dmy7kknrc/image/upload/v1755050942/Care_Connect_n28xvw.png'"
             />
+            <div class="brand-text">
+              <h1>CareConnect</h1>
+              <p>Health Information System • Clinical Portal</p>
+            </div>
           </div>
 
-          <div class="form-group">
-            <label for="loginPassword">Security Password</label>
-            <div class="pwd-box">
-              <input
-                type="password"
-                id="loginPassword"
-                class="input-control"
-                placeholder="Enter password (default: 1234)"
-                autocomplete="current-password"
-                required
-              />
-              <button type="button" id="togglePwdBtn" class="toggle-pwd" onclick="togglePasswordVisibility()">
-                Show
+          <!-- Authorized Clinical Staff Fast-Access -->
+          <div class="easy-login-box">
+            <div class="easy-header">
+              <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+              <span>Authorized Staff — 1-Click Fast Access</span>
+            </div>
+
+            <div class="easy-grid">
+              <button type="button" class="quick-user-btn reception-btn" onclick="quickLogin('reception1')">
+                <div class="quick-avatar teal">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                  </svg>
+                </div>
+                <div class="quick-text">
+                  <span class="quick-name">Sarah Jenkins</span>
+                  <span class="quick-role" style="color: #0d9488;">Front Desk Intake</span>
+                </div>
+              </button>
+
+              <button type="button" class="quick-user-btn cardio-btn" onclick="quickLogin('doctor1')">
+                <div class="quick-avatar blue">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M19 8h-2v3h-3v2h3v3h2v-3h3v-2h-3V8zm-7 4c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-1.5c0-2.33-4.67-3.5-7-3.5z"/>
+                  </svg>
+                </div>
+                <div class="quick-text">
+                  <span class="quick-name">Dr. Rajesh Sharma</span>
+                  <span class="quick-role" style="color: #0284c7;">Cardiology (MD)</span>
+                </div>
+              </button>
+
+              <button type="button" class="quick-user-btn med-btn" onclick="quickLogin('doctor2')">
+                <div class="quick-avatar purple">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M19 8h-2v3h-3v2h3v3h2v-3h3v-2h-3V8zm-7 4c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-1.5c0-2.33-4.67-3.5-7-3.5z"/>
+                  </svg>
+                </div>
+                <div class="quick-text">
+                  <span class="quick-name">Dr. Ananya Patel</span>
+                  <span class="quick-role" style="color: #7c3aed;">Medicine (MBBS)</span>
+                </div>
+              </button>
+
+              <button type="button" class="quick-user-btn pharma-btn" onclick="quickLogin('pharma1')">
+                <div class="quick-avatar green">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M4.5 10.5C3.67 10.5 3 11.17 3 12s.67 1.5 1.5 1.5h15c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5h-15z M10.5 4.5C10.5 3.67 11.17 3 12 3s1.5.67 1.5 1.5v15c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5v-15z"/>
+                  </svg>
+                </div>
+                <div class="quick-text">
+                  <span class="quick-name">Alex Rivera</span>
+                  <span class="quick-role" style="color: #059669;">Lead Pharmacist</span>
+                </div>
               </button>
             </div>
           </div>
 
-          <button type="submit" class="btn-primary" style="margin-top: 6px;">
-            Secure Sign In to Workstation
-          </button>
-        </form>
+          <div class="login-footer-badge">
+            <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: none; stroke: #059669; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
+            <span>HIPAA-Ready &nbsp;•&nbsp; 256-Bit SSL Encrypted Healthcare Session</span>
+          </div>
+        </div>
 
-        <!-- Preconfigured Credentials Display -->
-        <div class="demo-chips-box">
-          <span>Preconfigured Staff Credentials:</span>
-          <div class="chips-list">
-            <code>reception1 / 1234</code>
-            <code>doctor1 / 1234</code>
-            <code>doctor2 / 1234</code>
-            <code>pharma1 / 1234</code>
+        <!-- Right Column: Manual Login Form & Credentials -->
+        <div class="login-panel-right">
+          <div class="login-right-header">
+            <h3>Staff Workstation Sign In</h3>
+            <p>Select department and enter your credentials</p>
+          </div>
+
+          <!-- Manual Login Form -->
+          <form id="manualLoginForm" class="login-form" onsubmit="handleManualLogin(event)">
+            <div id="loginErrorAlert" class="error-alert" style="display: none;"></div>
+
+            <div class="form-group">
+              <label for="loginRole">Clinical Department</label>
+              <select id="loginRole" class="input-control">
+                <option value="Receptionist">Receptionist (Patient Intake & Triage)</option>
+                <option value="Doctor">Doctor (Clinical Consultation)</option>
+                <option value="Pharmacist">Pharmacist (Hospital Dispensary)</option>
+              </select>
+            </div>
+
+            <div class="form-row-2col">
+              <div class="form-group">
+                <label for="loginUsername">Staff ID / Username</label>
+                <input
+                  type="text"
+                  id="loginUsername"
+                  class="input-control"
+                  placeholder="e.g. reception1, doctor1"
+                  autocomplete="username"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <div class="pwd-box">
+                  <input
+                    type="password"
+                    id="loginPassword"
+                    class="input-control"
+                    placeholder="Password (1234)"
+                    autocomplete="current-password"
+                    required
+                  />
+                  <button type="button" id="togglePwdBtn" class="toggle-pwd" onclick="togglePasswordVisibility()">
+                    Show
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-primary" style="margin-top: 4px;">
+              <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/>
+              </svg>
+              <span>Sign In to Workstation</span>
+            </button>
+          </form>
+
+          <!-- Preconfigured Credentials Display -->
+          <div class="demo-chips-box">
+            <span>Preconfigured Staff Credentials:</span>
+            <div class="chips-list">
+              <code>reception1 / 1234</code>
+              <code>doctor1 / 1234</code>
+              <code>doctor2 / 1234</code>
+              <code>pharma1 / 1234</code>
+            </div>
           </div>
         </div>
       </div>
