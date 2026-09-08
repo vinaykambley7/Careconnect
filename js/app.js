@@ -1,6 +1,6 @@
 // ==========================================================================
 // CareConnect Health System - Official Hospital Information System (HIS)
-// Pure Vanilla JavaScript (Zero Dependencies, Medical Theme, Clean Architecture)
+// Pure Vanilla JavaScript (Zero Dependencies, Rich Medical Theme, Clean Code)
 // ==========================================================================
 
 // SVG Medical Icon Library (Eliminating messy emojis)
@@ -25,7 +25,7 @@ const USERS = [
     role: "Receptionist",
     name: "Sarah Jenkins",
     title: "Patient Intake Coordinator",
-    badge: "Front Desk",
+    badge: "Front Desk Intake",
     badgeColor: "#0d9488"
   },
   {
@@ -43,7 +43,7 @@ const USERS = [
     role: "Doctor",
     name: "Dr. Ananya Patel",
     title: "Consulting Physician (MBBS)",
-    badge: "Medicine",
+    badge: "General Medicine",
     badgeColor: "#7c3aed"
   },
   {
@@ -75,7 +75,7 @@ const DOCTORS = [
   }
 ];
 
-// Official Hospital Formulary (Quick Auto-Fill Catalog)
+// Official Hospital Formulary
 const COMMON_MEDICINES = [
   { name: "Paracetamol", defaultDosage: "500 mg", defaultFreq: "1-0-1 (Twice daily)", defaultDuration: "3 days", defaultInstructions: "After meals with water" },
   { name: "Amoxicillin", defaultDosage: "500 mg", defaultFreq: "1-1-1 (Thrice daily)", defaultDuration: "5 days", defaultInstructions: "After meals" },
@@ -87,7 +87,7 @@ const COMMON_MEDICINES = [
   { name: "Ibuprofen", defaultDosage: "400 mg", defaultFreq: "1-0-1 (Twice daily)", defaultDuration: "3 days", defaultInstructions: "Strictly after meals" }
 ];
 
-// Sample Hospital Patients for Triage Roster
+// Hospital Patients Dataset
 const INITIAL_PATIENTS = [
   {
     id: "PAT-1001",
@@ -213,7 +213,7 @@ let pharmaDoctorFilter = "";
 let pharmaDispenseFilter = "all";
 let activeDoctorPrescriptionPatientId = null;
 
-// Initialization
+// Initialize
 function initApp() {
   try {
     const savedPatients = localStorage.getItem("careconnect_patients");
@@ -248,7 +248,7 @@ function savePatients(newPatients) {
   }
 }
 
-// Clinical Toast Alert
+// Toast Notification
 function showToast(msg, type = "info") {
   const container = document.getElementById("toastContainer");
   if (!container) return;
@@ -260,13 +260,13 @@ function showToast(msg, type = "info") {
   container.appendChild(toast);
   setTimeout(() => {
     toast.style.opacity = "0";
-    toast.style.transform = "translateY(-8px)";
-    toast.style.transition = "all 0.2s ease";
-    setTimeout(() => toast.remove(), 200);
+    toast.style.transform = "translateY(-10px)";
+    toast.style.transition = "all 0.25s ease";
+    setTimeout(() => toast.remove(), 250);
   }, 3000);
 }
 
-// Authentication
+// Authentication Handlers
 function quickLogin(username) {
   const user = USERS.find((u) => u.username === username);
   if (user) {
@@ -341,7 +341,7 @@ function renderApp() {
 
   // Update Header Identity
   document.getElementById("userDisplayName").textContent = currentUser.name || currentUser.username;
-  document.getElementById("userRoleTag").textContent = currentUser.title || currentUser.role;
+  document.getElementById("userRoleTag").textContent = currentUser.badge || currentUser.role;
 
   const tabDesk = document.getElementById("tabDesk");
   const tabReports = document.getElementById("tabReports");
@@ -395,30 +395,42 @@ function renderReceptionistDesk(container) {
 
   container.innerHTML = `
     <div class="desk-container">
-      <!-- Hospital Metrics Row -->
+      <!-- Department Hero Banner (Rich Medical Teal/Navy Gradient) -->
+      <div class="department-hero">
+        <div class="dept-hero-title">
+          <h2>Front Desk Intake & Emergency Triage</h2>
+          <p>Central Patient Registration • Clinical Queue Management • On-Duty Workstation</p>
+        </div>
+        <div class="dept-hero-badges">
+          <div class="hero-pill-badge">🟢 Front Desk Online</div>
+          <div class="hero-pill-badge">🏥 Active Triage Queue</div>
+        </div>
+      </div>
+
+      <!-- 4 Color-Coded Hospital Metrics Row -->
       <div class="stats-row">
-        <div class="stat-card">
-          <div class="stat-icon-wrapper teal">${ICONS.user}</div>
+        <div class="stat-card blue-card">
+          <div class="stat-icon-wrapper blue">${ICONS.user}</div>
           <div class="stat-content">
             <span class="stat-number">${patients.length}</span>
             <span class="stat-title">Admitted Patients</span>
           </div>
         </div>
-        <div class="stat-card">
+        <div class="stat-card amber-card">
           <div class="stat-icon-wrapper amber">${ICONS.clock}</div>
           <div class="stat-content">
             <span class="stat-number">${waitingCount}</span>
             <span class="stat-title">Awaiting Consultation</span>
           </div>
         </div>
-        <div class="stat-card">
-          <div class="stat-icon-wrapper blue">${ICONS.clipboard}</div>
+        <div class="stat-card purple-card">
+          <div class="stat-icon-wrapper purple">${ICONS.clipboard}</div>
           <div class="stat-content">
             <span class="stat-number">${prescribedCount}</span>
-            <span class="stat-title">Consulted / Prescribed</span>
+            <span class="stat-title">Consulted & Prescribed</span>
           </div>
         </div>
-        <div class="stat-card">
+        <div class="stat-card green-card">
           <div class="stat-icon-wrapper green">${ICONS.check}</div>
           <div class="stat-content">
             <span class="stat-number">${dispensedCount}</span>
@@ -430,11 +442,11 @@ function renderReceptionistDesk(container) {
       <!-- 2-Column Clinical Layout -->
       <div class="reception-grid">
         <!-- Patient Admission Form -->
-        <div class="panel-card">
+        <div class="panel-card" style="border-top: 4px solid #0d9488;">
           <div class="panel-header">
             <div>
-              <h3 class="panel-title">Patient Intake & Triage</h3>
-              <p class="panel-subtitle">Register new patient & assign clinical queue</p>
+              <h3 class="panel-title">New Patient Admission</h3>
+              <p class="panel-subtitle">Register patient & assign clinical consultation queue</p>
             </div>
           </div>
 
@@ -467,7 +479,7 @@ function renderReceptionistDesk(container) {
 
             <div class="form-group">
               <label>Consulting Doctor Assignment *</label>
-              <select id="regDoctor" class="input-control" style="color: var(--hospital-teal-hover); font-weight: 600;">
+              <select id="regDoctor" class="input-control" style="color: #0f766e; font-weight: 700;">
                 ${DOCTORS.map((d) => `<option value="${d.username}">${d.name} — ${d.specialty} (${d.room})</option>`).join("")}
               </select>
             </div>
@@ -495,7 +507,7 @@ function renderReceptionistDesk(container) {
         </div>
 
         <!-- Consultation Queue Stream -->
-        <div class="panel-card">
+        <div class="panel-card" style="border-top: 4px solid #0284c7;">
           <div class="panel-header">
             <div>
               <h3 class="panel-title">Consultation Queue</h3>
@@ -546,11 +558,11 @@ function renderReceptionistDesk(container) {
                 <div class="clinical-summary-box">
                   <div class="clinical-item">
                     <span class="clinical-item-label">Consulting Doctor</span>
-                    <span class="clinical-item-value" style="color: var(--hospital-teal-hover); font-weight: 600;">🩺 ${p.doctorName || p.doctor}</span>
+                    <span class="clinical-item-value" style="color: #0284c7; font-weight: 700;">🩺 ${p.doctorName || p.doctor}</span>
                   </div>
                   <div class="clinical-item">
                     <span class="clinical-item-label">Chief Symptoms</span>
-                    <span class="clinical-item-value">${p.symptoms || "Routine Checkup"}</span>
+                    <span class="clinical-item-value" style="color: #b45309; font-weight: 600;">${p.symptoms || "Routine Checkup"}</span>
                   </div>
                   <div class="clinical-item">
                     <span class="clinical-item-label">Clinical Vitals</span>
@@ -563,7 +575,7 @@ function renderReceptionistDesk(container) {
                 </div>
 
                 <div class="patient-record-footer">
-                  <span style="color: var(--text-muted); font-weight: 500;">Prescriptions: ${(p.prescriptions || []).length} items</span>
+                  <span style="color: #475569; font-weight: 600;">💊 Prescriptions: ${(p.prescriptions || []).length} items</span>
                   <button class="btn-remove-patient" onclick="deletePatient('${p.id}', '${p.name}')">Remove</button>
                 </div>
               </div>
@@ -649,24 +661,20 @@ function renderDoctorDesk(container) {
 
   container.innerHTML = `
     <div class="desk-container">
-      <!-- Doctor Hero Card -->
-      <div class="doctor-hero">
-        <div class="doc-info-block">
-          <div class="doc-avatar-circle">${ICONS.doctor}</div>
-          <div class="doc-meta-info">
+      <!-- Doctor Hero Card (Rich Royal Sapphire Gradient) -->
+      <div class="department-hero doctor-variant">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div class="brand-crest" style="margin: 0; background: rgba(255, 255, 255, 0.2); box-shadow: none;">
+            ${ICONS.doctor}
+          </div>
+          <div class="dept-hero-title">
             <h2>${currentUser.name}</h2>
-            <p>${currentUser.title} • Active Clinical Workstation</p>
+            <p>${currentUser.title} • Clinical Consultation Cabin</p>
           </div>
         </div>
-        <div style="display: flex; gap: 12px;">
-          <div class="doc-queue-pill">
-            <span class="doc-queue-val">${assigned.length}</span>
-            <span class="doc-queue-lbl">Assigned</span>
-          </div>
-          <div class="doc-queue-pill">
-            <span class="doc-queue-val amber">${waitingCount}</span>
-            <span class="doc-queue-lbl">Waiting</span>
-          </div>
+        <div class="dept-hero-badges">
+          <div class="hero-pill-badge">${assigned.length} Patients In Queue</div>
+          <div class="hero-pill-badge" style="background: #f59e0b; border-color: #fbbf24;">${waitingCount} Waiting Now</div>
         </div>
       </div>
 
@@ -695,8 +703,8 @@ function renderDoctorDesk(container) {
                     <span class="patient-id-tag">${p.id}</span>
                     <span class="status-badge ${(p.status || "waiting").toLowerCase()}">${p.status || "Waiting"}</span>
                   </div>
-                  <h3 style="font-size: 16px; font-weight: 600; color: var(--text-title);">${p.name}</h3>
-                  <p style="font-size: 12px; color: var(--text-muted);">${p.age} yrs • ${p.gender || "Patient"} • 📞 ${p.contact}</p>
+                  <h3 style="font-size: 16px; font-weight: 700; color: #0b1f38;">${p.name}</h3>
+                  <p style="font-size: 12px; color: #64748b;">${p.age} yrs • ${p.gender || "Patient"} • 📞 ${p.contact}</p>
                 </div>
 
                 <div class="action-row">
@@ -715,11 +723,11 @@ function renderDoctorDesk(container) {
               <div class="clinical-summary-box">
                 <div class="clinical-item">
                   <span class="clinical-item-label">Chief Symptoms</span>
-                  <span class="clinical-item-value" style="color: var(--badge-waiting-text); font-weight: 600;">${p.symptoms || "None reported"}</span>
+                  <span class="clinical-item-value" style="color: #b45309; font-weight: 700;">${p.symptoms || "None reported"}</span>
                 </div>
                 <div class="clinical-item">
                   <span class="clinical-item-label">Recorded Vitals</span>
-                  <span class="clinical-item-value">BP: ${p.vitals?.bp || "120/80"} | Temp: ${p.vitals?.temp || "98.6°F"}</span>
+                  <span class="clinical-item-value" style="font-weight: 600;">BP: ${p.vitals?.bp || "120/80"} | Temp: ${p.vitals?.temp || "98.6°F"}</span>
                 </div>
                 <div class="clinical-item">
                   <span class="clinical-item-label">Admission Logged</span>
@@ -727,7 +735,7 @@ function renderDoctorDesk(container) {
                 </div>
                 <div class="clinical-item">
                   <span class="clinical-item-label">Current Status</span>
-                  <span class="clinical-item-value">${p.status}</span>
+                  <span class="clinical-item-value" style="font-weight: 600;">${p.status}</span>
                 </div>
               </div>
 
@@ -739,8 +747,8 @@ function renderDoctorDesk(container) {
                   <h4 class="rx-drawer-heading">Prescription Pad: ${p.name} (${p.id})</h4>
 
                   <div style="margin-bottom: 12px;">
-                    <label style="font-size: 11px; font-weight: 600; color: var(--hospital-teal-hover); text-transform: uppercase; letter-spacing: 0.03em;">Select from Hospital Formulary:</label>
-                    <select class="input-control" style="color: var(--hospital-teal-hover); font-weight: 600; margin-top: 4px;" onchange="handleSelectCatalogMed(this.value)">
+                    <label style="font-size: 11px; font-weight: 700; color: #0f766e; text-transform: uppercase; letter-spacing: 0.04em;">Hospital Formulary Quick Select:</label>
+                    <select class="input-control" style="color: #0f766e; font-weight: 700; margin-top: 4px;" onchange="handleSelectCatalogMed(this.value)">
                       <option value="">-- Choose Medication from Catalog or Type Below --</option>
                       ${COMMON_MEDICINES.map((m) => `<option value="${m.name}">${m.name} (${m.defaultDosage}, ${m.defaultFreq})</option>`).join("")}
                     </select>
@@ -772,10 +780,10 @@ function renderDoctorDesk(container) {
                     </div>
 
                     <div style="display: flex; gap: 10px; margin-top: 6px;">
-                      <button type="submit" class="btn-primary" style="padding: 8px 18px; font-size: 12.5px;">
+                      <button type="submit" class="btn-primary" style="padding: 9px 20px; font-size: 13px;">
                         ✔ Save & Send to Dispensary
                       </button>
-                      <button type="button" class="btn-logout" onclick="toggleDoctorRxDrawer('${p.id}')">
+                      <button type="button" class="btn-logout" style="background: #ffffff; color: #475569; border: 1.5px solid #cbd5e1;" onclick="toggleDoctorRxDrawer('${p.id}')">
                         Cancel
                       </button>
                     </div>
@@ -786,27 +794,27 @@ function renderDoctorDesk(container) {
               }
 
               <!-- Prescription List -->
-              <div style="border-top: 1px solid var(--border-light); padding-top: 14px; margin-top: 12px;">
-                <span style="font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em;">Active Prescriptions (${rxList.length}):</span>
+              <div style="border-top: 1.5px solid #e2e8f0; padding-top: 14px; margin-top: 14px;">
+                <span style="font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.04em;">Active Prescriptions (${rxList.length}):</span>
                 ${
                   rxList.length === 0
-                    ? `<p style="font-size: 12px; color: var(--text-caption); font-style: italic; margin-top: 6px;">No medications prescribed yet.</p>`
+                    ? `<p style="font-size: 12px; color: #94a3b8; font-style: italic; margin-top: 6px;">No medications prescribed yet.</p>`
                     : `
                   <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; margin-top: 8px;">
                     ${rxList
                       .map(
                         (rx, idx) => `
-                      <div class="rx-item-tile">
+                      <div class="rx-item-tile" style="border-left: 3px solid #7c3aed;">
                         <div class="rx-item-header">
-                          <span style="font-size: 10.5px; font-weight: 700; color: var(--hospital-teal-hover); font-family: monospace;">RX #${idx + 1}</span>
+                          <span style="font-size: 10.5px; font-weight: 800; color: #0d9488; font-family: monospace;">RX #${idx + 1}</span>
                           <span class="rx-tag-pill ${rx.dispensed ? "done" : "wait"}">${rx.dispensed ? "✔ Dispensed" : "⏳ Pending"}</span>
                         </div>
-                        <div style="font-size: 13.5px; font-weight: 600; color: var(--text-title); margin-bottom: 2px;">
-                          ${rx.medicine} <span style="font-size: 12px; color: var(--text-muted); font-weight: 500;">(${rx.dosage})</span>
+                        <div style="font-size: 14px; font-weight: 700; color: #0b1f38; margin-bottom: 2px;">
+                          ${rx.medicine} <span style="font-size: 12px; color: #64748b; font-weight: 500;">(${rx.dosage})</span>
                         </div>
-                        <p style="font-size: 12px; color: var(--text-body); margin-bottom: 2px;">${rx.frequency} • ${rx.duration}</p>
-                        <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px;">Directions: ${rx.instructions || "As directed"}</p>
-                        <button style="background: none; border: none; color: var(--badge-danger-text); font-size: 11px; cursor: pointer; font-weight: 600;" onclick="deletePrescription('${p.id}', '${rx.id}')">✕ Remove</button>
+                        <p style="font-size: 12px; color: #1e293b; margin-bottom: 2px; font-weight: 600;">${rx.frequency} • ${rx.duration}</p>
+                        <p style="font-size: 11px; color: #64748b; margin-bottom: 8px;">Directions: ${rx.instructions || "As directed"}</p>
+                        <button style="background: none; border: none; color: #be123c; font-size: 11px; cursor: pointer; font-weight: 700;" onclick="deletePrescription('${p.id}', '${rx.id}')">✕ Remove</button>
                       </div>
                     `
                       )
@@ -953,23 +961,41 @@ function renderPharmacistDesk(container) {
 
   container.innerHTML = `
     <div class="desk-container">
-      <!-- Metrics Cards -->
+      <!-- Pharmacy Hero Banner (Rich Emerald Gradient) -->
+      <div class="department-hero pharma-variant">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div class="brand-crest" style="margin: 0; background: rgba(255, 255, 255, 0.2); box-shadow: none;">
+            ${ICONS.pill}
+          </div>
+          <div class="dept-hero-title">
+            <h2>Hospital Dispensary & Central Pharmacy</h2>
+            <p>Lead Pharmacist Workstation • Prescription Verification & Fulfillment</p>
+          </div>
+        </div>
+        <div class="dept-hero-badges">
+          <div class="hero-pill-badge">Total: ${totalPrescribed} Rx</div>
+          <div class="hero-pill-badge" style="background: #f59e0b; border-color: #fbbf24;">Pending: ${totalPending}</div>
+          <div class="hero-pill-badge" style="background: #10b981; border-color: #34d399;">Dispensed: ${totalDispensed}</div>
+        </div>
+      </div>
+
+      <!-- Color-Coded Pharmacy Metrics -->
       <div class="stats-row" style="grid-template-columns: repeat(3, 1fr);">
-        <div class="stat-card">
-          <div class="stat-icon-wrapper blue">${ICONS.pill}</div>
+        <div class="stat-card purple-card">
+          <div class="stat-icon-wrapper purple">${ICONS.pill}</div>
           <div class="stat-content">
             <span class="stat-number">${totalPrescribed}</span>
             <span class="stat-title">Prescriptions Logged</span>
           </div>
         </div>
-        <div class="stat-card">
+        <div class="stat-card amber-card">
           <div class="stat-icon-wrapper amber">${ICONS.clock}</div>
           <div class="stat-content">
             <span class="stat-number">${totalPending}</span>
             <span class="stat-title">Awaiting Fulfillment</span>
           </div>
         </div>
-        <div class="stat-card">
+        <div class="stat-card green-card">
           <div class="stat-icon-wrapper green">${ICONS.check}</div>
           <div class="stat-content">
             <span class="stat-number">${totalDispensed}</span>
@@ -993,7 +1019,7 @@ function renderPharmacistDesk(container) {
         </div>
 
         <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-          <select class="input-control" style="color: var(--hospital-teal-hover); font-weight: 600; width: auto;" onchange="handlePharmaDocFilter(this.value)">
+          <select class="input-control" style="color: #0f766e; font-weight: 700; width: auto;" onchange="handlePharmaDocFilter(this.value)">
             <option value="">All Consulting Doctors</option>
             ${uniqueDocs.map((doc) => `<option value="${doc}" ${pharmaDoctorFilter === doc ? "selected" : ""}>${doc}</option>`).join("")}
           </select>
@@ -1022,8 +1048,8 @@ function renderPharmacistDesk(container) {
               <div class="panel-header">
                 <div>
                   <span class="patient-id-tag">${patient.id}</span>
-                  <h4 style="font-size: 16px; font-weight: 600; color: var(--text-title); margin-top: 2px;">${patient.name}</h4>
-                  <span style="font-size: 12px; color: var(--text-muted);">${patient.age} yrs • 📞 ${patient.contact} • 🩺 ${patient.doctorName || patient.doctor}</span>
+                  <h4 style="font-size: 16px; font-weight: 700; color: #0b1f38; margin-top: 2px;">${patient.name}</h4>
+                  <span style="font-size: 12px; color: #64748b;">${patient.age} yrs • 📞 ${patient.contact} • 🩺 ${patient.doctorName || patient.doctor}</span>
                 </div>
 
                 <div style="display: flex; align-items: center; gap: 10px;">
@@ -1041,7 +1067,7 @@ function renderPharmacistDesk(container) {
               <div class="data-table-container">
                 ${
                   rxList.length === 0
-                    ? `<p style="color: var(--text-muted); font-style: italic; padding: 14px;">No active prescriptions recorded.</p>`
+                    ? `<p style="color: #64748b; font-style: italic; padding: 14px;">No active prescriptions recorded.</p>`
                     : `
                   <table class="enterprise-table">
                     <thead>
@@ -1057,21 +1083,21 @@ function renderPharmacistDesk(container) {
                       ${rxList
                         .map(
                           (rx) => `
-                        <tr style="${rx.dispensed ? "background-color: var(--hospital-teal-light);" : ""}">
+                        <tr style="${rx.dispensed ? "background-color: #f0fdfa;" : ""}">
                           <td>
-                            <strong style="color: var(--text-title); font-size: 13px;">${rx.medicine}</strong>
-                            <span style="display: block; font-size: 11px; color: var(--hospital-teal-hover); font-weight: 600;">${rx.dosage}</span>
+                            <strong style="color: #0b1f38; font-size: 13.5px;">${rx.medicine}</strong>
+                            <span style="display: block; font-size: 11px; color: #0d9488; font-weight: 700;">${rx.dosage}</span>
                           </td>
                           <td>
-                            <span style="display: block; font-size: 12px; color: var(--text-body); font-weight: 500;">${rx.frequency}</span>
-                            <span style="font-size: 11px; color: var(--text-muted);">${rx.duration}</span>
+                            <span style="display: block; font-size: 12.5px; color: #1e293b; font-weight: 600;">${rx.frequency}</span>
+                            <span style="font-size: 11.5px; color: #64748b;">${rx.duration}</span>
                           </td>
-                          <td style="color: var(--text-muted); font-size: 12px;">${rx.instructions || "As instructed"}</td>
+                          <td style="color: #475569; font-size: 12px;">${rx.instructions || "As instructed"}</td>
                           <td>
                             ${
                               rx.dispensed
-                                ? `<span style="color: var(--badge-dispensed-text); font-size: 11.5px; font-weight: 600;">✔ Dispensed ${rx.dispensedAt ? `(${rx.dispensedAt})` : ""}</span>`
-                                : `<span style="color: var(--badge-waiting-text); font-size: 11.5px; font-weight: 600;">⏳ Awaiting Dispense</span>`
+                                ? `<span style="color: #047857; font-size: 12px; font-weight: 700;">✔ Dispensed ${rx.dispensedAt ? `(${rx.dispensedAt})` : ""}</span>`
+                                : `<span style="color: #b45309; font-size: 12px; font-weight: 700;">⏳ Awaiting Dispense</span>`
                             }
                           </td>
                           <td style="text-align: right;">
@@ -1217,41 +1243,44 @@ function renderReports() {
 
   container.innerHTML = `
     <div class="desk-container">
-      <div class="reports-header-box">
-        <div>
-          <h2 style="font-size: 20px; font-weight: 700; color: var(--text-title);">Hospital Operational Analytics</h2>
-          <p style="color: var(--text-muted); font-size: 12.5px;">Real-time metrics across Front Desk Intake, Consultation, and Dispensary</p>
+      <!-- Analytics Hero Banner (Deep Navy Gradient) -->
+      <div class="department-hero reports-variant">
+        <div class="dept-hero-title">
+          <h2>Hospital Operational Analytics & Executive Reports</h2>
+          <p>Real-time clinical throughput across Admissions, Consultations, and Pharmacy Dispensary</p>
         </div>
-        <button class="btn-print-action" onclick="window.print()">
-          ${ICONS.printer}
-          <span>Print / Save PDF</span>
-        </button>
+        <div class="dept-hero-badges">
+          <button class="btn-print-action" onclick="window.print()">
+            ${ICONS.printer}
+            <span>Print / Save PDF</span>
+          </button>
+        </div>
       </div>
 
-      <!-- Stat Cards -->
+      <!-- Color-Coded Metrics Cards -->
       <div class="stats-row">
-        <div class="stat-card">
-          <div class="stat-icon-wrapper teal">${ICONS.user}</div>
+        <div class="stat-card blue-card">
+          <div class="stat-icon-wrapper blue">${ICONS.user}</div>
           <div class="stat-content">
             <span class="stat-number">${totalPatients}</span>
             <span class="stat-title">Admitted Patients</span>
           </div>
         </div>
-        <div class="stat-card">
+        <div class="stat-card amber-card">
           <div class="stat-icon-wrapper amber">${ICONS.clock}</div>
           <div class="stat-content">
             <span class="stat-number">${waitingCount}</span>
             <span class="stat-title">Waiting Queue</span>
           </div>
         </div>
-        <div class="stat-card">
-          <div class="stat-icon-wrapper blue">${ICONS.pill}</div>
+        <div class="stat-card purple-card">
+          <div class="stat-icon-wrapper purple">${ICONS.pill}</div>
           <div class="stat-content">
             <span class="stat-number">${totalRx}</span>
             <span class="stat-title">Prescriptions Issued</span>
           </div>
         </div>
-        <div class="stat-card">
+        <div class="stat-card green-card">
           <div class="stat-icon-wrapper green">${ICONS.check}</div>
           <div class="stat-content">
             <span class="stat-number">${totalDisp} (${rate}%)</span>
@@ -1262,14 +1291,14 @@ function renderReports() {
 
       <!-- Pharmacy Fulfillment Track -->
       <div class="progress-card">
-        <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; margin-bottom: 6px;">
-          <span style="color: var(--text-title);">Pharmacy Fulfillment Rate</span>
-          <span style="color: var(--badge-dispensed-text);">${rate}% Fulfilled</span>
+        <div style="display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 700; margin-bottom: 6px;">
+          <span style="color: #0b1f38;">Dispensary Fulfillment Throughput</span>
+          <span style="color: #059669;">${rate}% Fulfilled</span>
         </div>
         <div class="progress-track">
           <div class="progress-indicator" style="width: ${rate}%;"></div>
         </div>
-        <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); font-weight: 500;">
+        <div style="display: flex; justify-content: space-between; font-size: 11.5px; color: #64748b; font-weight: 600;">
           <span>${totalDisp} Prescriptions Dispensed</span>
           <span>${totalRx - totalDisp} Pending in Dispensary</span>
         </div>
@@ -1278,7 +1307,7 @@ function renderReports() {
       <!-- 2-Column Split -->
       <div class="reports-columns">
         <!-- Doctor Workload -->
-        <div class="panel-card">
+        <div class="panel-card" style="border-top: 4px solid #0284c7;">
           <h3 class="panel-title" style="margin-bottom: 16px;">Doctor Consultation Workload</h3>
           <div>
             ${docStats
@@ -1288,8 +1317,8 @@ function renderReports() {
               <div class="doctor-bar-card">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
                   <div>
-                    <strong style="color: var(--text-title); font-size: 13px;">${doc.name}</strong>
-                    <span style="display: block; font-size: 11px; color: var(--text-muted);">${doc.specialty}</span>
+                    <strong style="color: #0b1f38; font-size: 13.5px;">${doc.name}</strong>
+                    <span style="display: block; font-size: 11px; color: #64748b;">${doc.specialty}</span>
                   </div>
                   <span class="system-tag">${doc.patients} Patients • ${doc.rx} Rx</span>
                 </div>
@@ -1304,11 +1333,11 @@ function renderReports() {
         </div>
 
         <!-- Top Medications -->
-        <div class="panel-card">
+        <div class="panel-card" style="border-top: 4px solid #059669;">
           <h3 class="panel-title" style="margin-bottom: 16px;">Medication Dispensary Log</h3>
           ${
             topMeds.length === 0
-              ? `<p style="color: var(--text-muted); font-style: italic;">No medications logged yet.</p>`
+              ? `<p style="color: #64748b; font-style: italic;">No medications logged yet.</p>`
               : `
             <div class="data-table-container">
               <table class="enterprise-table">
@@ -1326,7 +1355,7 @@ function renderReports() {
                       const mRate = m.count > 0 ? Math.round((m.dispensed / m.count) * 100) : 0;
                       return `
                       <tr>
-                        <td><strong style="color: var(--text-title);">${m.name}</strong></td>
+                        <td><strong style="color: #0b1f38;">${m.name}</strong></td>
                         <td>${m.count}</td>
                         <td>${m.dispensed}</td>
                         <td>
@@ -1347,5 +1376,5 @@ function renderReports() {
   `;
 }
 
-// Attach Bootstrap
+// Bootstrap
 window.addEventListener("DOMContentLoaded", initApp);
