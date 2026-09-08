@@ -174,13 +174,14 @@ button, input, select, textarea {
 
 /* Left Panel: Hospital Branding & 1-Click Fast Access */
 .login-panel-left {
-  padding: 26px 26px;
-  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
-  border-right: 1.5px solid #e2e8f0;
+  padding: 28px 26px;
+  background: linear-gradient(155deg, #071526 0%, #0c233f 50%, #0d2e4f 100%);
+  border-right: 1.5px solid rgba(255, 255, 255, 0.08);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 16px;
+  color: #ffffff;
 }
 
 .login-brand-horizontal {
@@ -189,20 +190,34 @@ button, input, select, textarea {
   gap: 14px;
 }
 
+.login-logo-box {
+  width: 58px;
+  height: 58px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  border: 1.5px solid rgba(56, 189, 248, 0.35);
+  flex-shrink: 0;
+}
+
 .login-brand-horizontal .login-logo {
-  max-width: 95px;
-  max-height: 48px;
-  height: auto;
+  width: 58px !important;
+  height: 58px !important;
+  max-width: 58px !important;
+  max-height: 58px !important;
   object-fit: contain;
   margin-bottom: 0;
-  border-radius: var(--radius-xs);
-  filter: drop-shadow(0 3px 6px rgba(11, 31, 56, 0.15));
+  display: block;
 }
 
 .login-brand-horizontal .brand-text h1 {
   font-size: 21px;
   font-weight: 800;
-  color: #0b1f38;
+  color: #ffffff;
   letter-spacing: -0.02em;
   margin: 0;
   line-height: 1.2;
@@ -210,22 +225,22 @@ button, input, select, textarea {
 
 .login-brand-horizontal .brand-text p {
   font-size: 10.5px;
-  color: #0d9488;
+  color: #38bdf8;
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  margin: 2px 0 0 0;
+  margin: 3px 0 0 0;
 }
 
-.easy-login-box {
-  background: #ffffff;
-  border: 1.5px solid #e2e8f0;
+.login-panel-left .easy-login-box {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(56, 189, 248, 0.22);
   border-radius: var(--radius-md);
   padding: 12px 14px;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
 }
 
-.easy-header {
+.login-panel-left .easy-header {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -233,56 +248,50 @@ button, input, select, textarea {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #0f766e;
+  color: #38bdf8;
   margin-bottom: 10px;
 }
 
-.easy-header svg {
+.login-panel-left .easy-header svg {
   width: 14px;
   height: 14px;
-  stroke: #0d9488;
+  stroke: #38bdf8;
   fill: none;
 }
 
-.easy-grid {
+.login-panel-left .easy-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
 }
 
-.quick-user-btn {
+.login-panel-left .quick-user-btn {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: #ffffff;
-  border: 1.5px solid #e2e8f0;
+  background: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-left-width: 4px;
   border-radius: var(--radius-sm);
   padding: 7px 10px;
   text-align: left;
   cursor: pointer;
   transition: all 0.15s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 
-.quick-user-btn:hover {
+.login-panel-left .quick-user-btn:hover {
+  background: #334155;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(11, 31, 56, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
 }
 
-.quick-user-btn.reception-btn { border-left-color: #0d9488; }
-.quick-user-btn.reception-btn:hover { background: #f0fdfa; border-color: #0d9488; }
+.login-panel-left .quick-user-btn.reception-btn { border-left-color: #0d9488; }
+.login-panel-left .quick-user-btn.cardio-btn { border-left-color: #0284c7; }
+.login-panel-left .quick-user-btn.med-btn { border-left-color: #8b5cf6; }
+.login-panel-left .quick-user-btn.pharma-btn { border-left-color: #10b981; }
 
-.quick-user-btn.cardio-btn { border-left-color: #0284c7; }
-.quick-user-btn.cardio-btn:hover { background: #f0f9ff; border-color: #0284c7; }
-
-.quick-user-btn.med-btn { border-left-color: #7c3aed; }
-.quick-user-btn.med-btn:hover { background: #f5f3ff; border-color: #7c3aed; }
-
-.quick-user-btn.pharma-btn { border-left-color: #059669; }
-.quick-user-btn.pharma-btn:hover { background: #ecfdf5; border-color: #059669; }
-
-.quick-avatar {
+.login-panel-left .quick-avatar {
   width: 30px;
   height: 30px;
   border-radius: var(--radius-full);
@@ -293,34 +302,34 @@ button, input, select, textarea {
   color: #ffffff;
 }
 
-.quick-avatar.teal { background: #0d9488; }
-.quick-avatar.blue { background: #0284c7; }
-.quick-avatar.purple { background: #7c3aed; }
-.quick-avatar.green { background: #059669; }
+.login-panel-left .quick-avatar.teal { background: #0d9488; }
+.login-panel-left .quick-avatar.blue { background: #0284c7; }
+.login-panel-left .quick-avatar.purple { background: #8b5cf6; }
+.login-panel-left .quick-avatar.green { background: #10b981; }
 
-.quick-avatar svg {
+.login-panel-left .quick-avatar svg {
   width: 15px;
   height: 15px;
   fill: currentColor;
 }
 
-.quick-text {
+.login-panel-left .quick-text {
   display: flex;
   flex-direction: column;
   overflow: hidden;
   min-width: 0;
 }
 
-.quick-name {
+.login-panel-left .quick-name {
   font-size: 11.5px;
   font-weight: 700;
-  color: #0b1f38;
+  color: #ffffff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.quick-role {
+.login-panel-left .quick-role {
   font-size: 10px;
   font-weight: 600;
   white-space: nowrap;
@@ -328,15 +337,15 @@ button, input, select, textarea {
   text-overflow: ellipsis;
 }
 
-.login-footer-badge {
+.login-panel-left .login-footer-badge {
   display: flex;
   align-items: center;
   gap: 7px;
   font-size: 10.5px;
   font-weight: 600;
-  color: #047857;
-  background: #ecfdf5;
-  border: 1px solid #a7f3d0;
+  color: #34d399;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.25);
   padding: 5px 10px;
   border-radius: var(--radius-full);
   width: fit-content;
@@ -574,9 +583,10 @@ button, input, select, textarea {
   width: auto;
   object-fit: contain;
   border-radius: var(--radius-xs);
-  background: #ffffff;
-  padding: 2px 6px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  background: #000000;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  padding: 2px 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .brand-icon {

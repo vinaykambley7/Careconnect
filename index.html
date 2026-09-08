@@ -9,6 +9,30 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="css/style.css" />
+    <style>
+      /* Fail-safe image & layout locks */
+      .login-logo {
+        width: 58px !important;
+        height: 58px !important;
+        max-width: 58px !important;
+        max-height: 58px !important;
+        object-fit: contain !important;
+        display: block !important;
+      }
+      .login-logo-box {
+        width: 58px;
+        height: 58px;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #000000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+        border: 1.5px solid rgba(56, 189, 248, 0.35);
+        flex-shrink: 0;
+      }
+    </style>
   </head>
   <body>
     <!-- Toast Notification Container -->
@@ -22,15 +46,20 @@
         <!-- Left Column: Hospital Branding & 1-Click Fast Access Staff -->
         <div class="login-panel-left">
           <div class="login-brand-horizontal">
-            <img
-              src="images/logo.png"
-              alt="CareConnect Logo"
-              class="login-logo"
-              onerror="this.src='https://res.cloudinary.com/dmy7kknrc/image/upload/v1755050942/Care_Connect_n28xvw.png'"
-            />
+            <div class="login-logo-box">
+              <img
+                src="images/logo.png"
+                alt="CareConnect Logo"
+                width="58"
+                height="58"
+                class="login-logo"
+                style="width: 58px; height: 58px; max-width: 58px; max-height: 58px; object-fit: contain;"
+                onerror="this.src='https://res.cloudinary.com/dmy7kknrc/image/upload/v1755050942/Care_Connect_n28xvw.png'"
+              />
+            </div>
             <div class="brand-text">
               <h1>CareConnect</h1>
-              <p>Health Information System • Clinical Portal</p>
+              <p>Health Information System • Clinical Staff Portal</p>
             </div>
           </div>
 
