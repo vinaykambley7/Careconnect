@@ -3,8 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CareConnect - Hospital Management System</title>
+    <title>CareConnect - Hospital Information System (HIS)</title>
     <link rel="icon" type="image/png" href="https://res.cloudinary.com/dmy7kknrc/image/upload/v1755050942/Care_Connect_n28xvw.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
@@ -12,66 +14,83 @@
     <div id="toastContainer" class="toast-container"></div>
 
     <!-- ====================================================================
-         1. LOGIN VIEW SCREEN
+         1. HOSPITAL CLINICAL LOGIN PORTAL
          ==================================================================== -->
     <div id="loginView" class="login-wrapper">
       <div class="login-card">
-        <!-- Logo & Branding -->
+        <!-- Hospital Branding & Crest -->
         <div class="login-brand">
-          <img
-            src="https://res.cloudinary.com/dmy7kknrc/image/upload/v1755050942/Care_Connect_n28xvw.png"
-            alt="CareConnect Logo"
-            class="login-logo"
-            onerror="this.style.display='none'"
-          />
+          <div class="brand-crest">
+            <svg viewBox="0 0 24 24">
+              <path d="M19 10.5h-5.5V5c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v5.5H5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5h5.5V19c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-5.5H19c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5z"/>
+            </svg>
+          </div>
           <h1>CareConnect</h1>
-          <p>Health Information System • Clinical & Administrative Portal</p>
+          <p>Health Information System • Clinical Staff Portal</p>
         </div>
 
         <!-- Authorized Clinical Staff Fast-Access -->
         <div class="easy-login-box">
           <div class="easy-header">
-            <span>🛡️</span>
-            <span>Clinical Staff — 1-Click Fast Access</span>
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <span>Authorized Staff — 1-Click Fast Access</span>
           </div>
 
           <div class="easy-grid">
             <button type="button" class="quick-user-btn" onclick="quickLogin('reception1')">
-              <span class="quick-avatar">👩‍💼</span>
+              <div class="quick-avatar">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+              </div>
               <div class="quick-text">
                 <span class="quick-name">Sarah Jenkins</span>
-                <span class="quick-role" style="color: #0284c7;">Front Desk</span>
+                <span class="quick-role">Front Desk Intake</span>
               </div>
             </button>
 
             <button type="button" class="quick-user-btn" onclick="quickLogin('doctor1')">
-              <span class="quick-avatar">👨‍⚕️</span>
+              <div class="quick-avatar" style="color: #0284c7;">
+                <svg viewBox="0 0 24 24">
+                  <path d="M19 8h-2v3h-3v2h3v3h2v-3h3v-2h-3V8zm-7 4c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-1.5c0-2.33-4.67-3.5-7-3.5z"/>
+                </svg>
+              </div>
               <div class="quick-text">
                 <span class="quick-name">Dr. Rajesh Sharma</span>
-                <span class="quick-role" style="color: #059669;">Cardiology</span>
+                <span class="quick-role">Cardiology (MD)</span>
               </div>
             </button>
 
             <button type="button" class="quick-user-btn" onclick="quickLogin('doctor2')">
-              <span class="quick-avatar">👩‍⚕️</span>
+              <div class="quick-avatar" style="color: #7c3aed;">
+                <svg viewBox="0 0 24 24">
+                  <path d="M19 8h-2v3h-3v2h3v3h2v-3h3v-2h-3V8zm-7 4c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-1.5c0-2.33-4.67-3.5-7-3.5z"/>
+                </svg>
+              </div>
               <div class="quick-text">
                 <span class="quick-name">Dr. Ananya Patel</span>
-                <span class="quick-role" style="color: #7c3aed;">Medicine</span>
+                <span class="quick-role">Medicine (MBBS)</span>
               </div>
             </button>
 
             <button type="button" class="quick-user-btn" onclick="quickLogin('pharma1')">
-              <span class="quick-avatar">💊</span>
+              <div class="quick-avatar" style="color: #059669;">
+                <svg viewBox="0 0 24 24">
+                  <path d="M4.5 10.5C3.67 10.5 3 11.17 3 12s.67 1.5 1.5 1.5h15c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5h-15z M10.5 4.5C10.5 3.67 11.17 3 12 3s1.5.67 1.5 1.5v15c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5v-15z"/>
+                </svg>
+              </div>
               <div class="quick-text">
                 <span class="quick-name">Alex Rivera</span>
-                <span class="quick-role" style="color: #d97706;">Pharmacy</span>
+                <span class="quick-role">Lead Pharmacist</span>
               </div>
             </button>
           </div>
         </div>
 
         <div class="login-divider">
-          <span>OR SIGN IN MANUALLY</span>
+          <span>OR SIGN IN WITH CREDENTIALS</span>
         </div>
 
         <!-- Manual Login Form -->
@@ -79,16 +98,16 @@
           <div id="loginErrorAlert" class="error-alert" style="display: none;"></div>
 
           <div class="form-group">
-            <label for="loginRole">Select Department Role</label>
+            <label for="loginRole">Clinical Department</label>
             <select id="loginRole" class="input-control">
-              <option value="Receptionist">Receptionist (Front Desk)</option>
-              <option value="Doctor">Doctor (Consultation)</option>
-              <option value="Pharmacist">Pharmacist (Dispensary)</option>
+              <option value="Receptionist">Receptionist (Patient Intake & Triage)</option>
+              <option value="Doctor">Doctor (Clinical Consultation)</option>
+              <option value="Pharmacist">Pharmacist (Hospital Dispensary)</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label for="loginUsername">Username</label>
+            <label for="loginUsername">Staff ID / Username</label>
             <input
               type="text"
               id="loginUsername"
@@ -100,7 +119,7 @@
           </div>
 
           <div class="form-group">
-            <label for="loginPassword">Password</label>
+            <label for="loginPassword">Security Password</label>
             <div class="pwd-box">
               <input
                 type="password"
@@ -117,13 +136,13 @@
           </div>
 
           <button type="submit" class="btn-primary" style="margin-top: 6px;">
-            Sign In to Dashboard
+            Secure Sign In to Workstation
           </button>
         </form>
 
-        <!-- Credentials Helper Chips -->
+        <!-- Preconfigured Credentials Display -->
         <div class="demo-chips-box">
-          <span>Demo Credentials:</span>
+          <span>Preconfigured Staff Credentials:</span>
           <div class="chips-list">
             <code>reception1 / 1234</code>
             <code>doctor1 / 1234</code>
@@ -135,29 +154,36 @@
     </div>
 
     <!-- ====================================================================
-         2. AUTHENTICATED APP SCREEN
+         2. AUTHENTICATED HOSPITAL WORKSTATION SCREEN
          ==================================================================== -->
     <div id="appView" style="display: none;">
-      <!-- Header Navigation Bar -->
+      <!-- Hospital Header Navigation Bar -->
       <header class="app-header">
         <div class="header-left">
           <div class="brand-wrapper" onclick="switchTab('desk')">
-            <img
-              src="https://res.cloudinary.com/dmy7kknrc/image/upload/v1755050942/Care_Connect_n28xvw.png"
-              alt="CareConnect Logo"
-              class="brand-logo-small"
-              onerror="this.style.display='none'"
-            />
-            <span class="brand-title">CareConnect</span>
-            <span class="system-tag">HMS</span>
+            <div class="brand-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M19 10.5h-5.5V5c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v5.5H5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5h5.5V19c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-5.5H19c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5z"/>
+              </svg>
+            </div>
+            <div class="brand-title-group">
+              <span class="brand-title">CareConnect</span>
+              <span class="brand-subtitle">Health Information System</span>
+            </div>
           </div>
 
           <nav class="nav-tabs">
             <button id="tabDesk" class="tab-btn active" onclick="switchTab('desk')">
-              📊 Desk
+              <svg viewBox="0 0 24 24">
+                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
+              </svg>
+              <span>Department Desk</span>
             </button>
             <button id="tabReports" class="tab-btn" onclick="switchTab('reports')">
-              📈 Reports & Analytics
+              <svg viewBox="0 0 24 24">
+                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+              </svg>
+              <span>Operational Analytics</span>
             </button>
           </nav>
         </div>
@@ -165,7 +191,11 @@
         <div class="header-right">
           <!-- User Profile Capsule -->
           <div class="user-capsule">
-            <span id="userAvatarSmall" class="user-cap-avatar">👤</span>
+            <div id="userAvatarSmall" class="user-cap-avatar">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+              </svg>
+            </div>
             <div class="user-cap-info">
               <span id="userDisplayName" class="user-cap-name">Staff User</span>
               <span id="userRoleTag" class="user-cap-role">Role</span>
@@ -173,19 +203,24 @@
           </div>
 
           <button class="btn-logout" onclick="logout()" title="Sign out of CareConnect">
-            🚪 Logout
+            <svg viewBox="0 0 24 24">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            <span>Sign Out</span>
           </button>
         </div>
       </header>
 
-      <!-- Main Dynamic Content -->
+      <!-- Main Clinical Content Workspace -->
       <main>
         <section id="deskSection"></section>
         <section id="reportsSection" style="display: none;"></section>
       </main>
     </div>
 
-    <!-- Pure Vanilla JS -->
+    <!-- Pure Vanilla JavaScript -->
     <script src="js/app.js"></script>
   </body>
 </html>

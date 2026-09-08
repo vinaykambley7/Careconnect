@@ -1,33 +1,50 @@
-// CareConnect HMS - Enterprise Medical SaaS Architecture
-// Pure Vanilla JavaScript (No Frameworks, Zero Dependencies)
+// ==========================================================================
+// CareConnect Health System - Official Hospital Information System (HIS)
+// Pure Vanilla JavaScript (Zero Dependencies, Medical Theme, Clean Architecture)
+// ==========================================================================
 
+// SVG Medical Icon Library (Eliminating messy emojis)
+const ICONS = {
+  cross: `<svg viewBox="0 0 24 24"><path d="M19 10.5h-5.5V5c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v5.5H5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5h5.5V19c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-5.5H19c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5z"/></svg>`,
+  user: `<svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>`,
+  doctor: `<svg viewBox="0 0 24 24"><path d="M19 8h-2v3h-3v2h3v3h2v-3h3v-2h-3V8zm-7 4c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-1.5c0-2.33-4.67-3.5-7-3.5z"/></svg>`,
+  pill: `<svg viewBox="0 0 24 24"><path d="M6 3h12c1.66 0 3 1.34 3 3v12c0 1.66-1.34 3-3 3H6c-1.66 0-3-1.34-3-3V6c0-1.66 1.34-3 3-3zm0 2c-.55 0-1 .45-1 1v5h14V6c0-.55-.45-1-1-1H6zm14 8H4v5c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-5z"/></svg>`,
+  clock: `<svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>`,
+  check: `<svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>`,
+  search: `<svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>`,
+  clipboard: `<svg viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>`,
+  printer: `<svg viewBox="0 0 24 24"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>`,
+  trash: `<svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>`
+};
+
+// Authorized Hospital Staff Directory
 const USERS = [
   {
     username: "reception1",
     password: "1234",
     role: "Receptionist",
     name: "Sarah Jenkins",
-    title: "Front Desk Administrator",
-    avatar: "👩‍💼",
-    badgeColor: "#38bdf8"
+    title: "Patient Intake Coordinator",
+    badge: "Front Desk",
+    badgeColor: "#0d9488"
   },
   {
     username: "doctor1",
     password: "1234",
     role: "Doctor",
     name: "Dr. Rajesh Sharma",
-    title: "Chief Cardiologist (MD)",
-    avatar: "👨‍⚕️",
-    badgeColor: "#10b981"
+    title: "Senior Cardiologist (MD)",
+    badge: "Cardiology",
+    badgeColor: "#0284c7"
   },
   {
     username: "doctor2",
     password: "1234",
     role: "Doctor",
     name: "Dr. Ananya Patel",
-    title: "Senior Physician (MBBS)",
-    avatar: "👩‍⚕️",
-    badgeColor: "#c084fc"
+    title: "Consulting Physician (MBBS)",
+    badge: "Medicine",
+    badgeColor: "#7c3aed"
   },
   {
     username: "pharma1",
@@ -35,11 +52,12 @@ const USERS = [
     role: "Pharmacist",
     name: "Alex Rivera",
     title: "Lead Dispensary Pharmacist",
-    avatar: "💊",
-    badgeColor: "#f59e0b"
+    badge: "Dispensary",
+    badgeColor: "#059669"
   }
 ];
 
+// Active Hospital Doctors
 const DOCTORS = [
   {
     id: "doctor1",
@@ -57,17 +75,19 @@ const DOCTORS = [
   }
 ];
 
+// Official Hospital Formulary (Quick Auto-Fill Catalog)
 const COMMON_MEDICINES = [
-  { name: "Paracetamol", defaultDosage: "500 mg", defaultFreq: "1-0-1 (Twice daily)", defaultDuration: "3 days", defaultInstructions: "After meals" },
-  { name: "Amoxicillin", defaultDosage: "500 mg", defaultFreq: "1-1-1 (Thrice daily)", defaultDuration: "5 days", defaultInstructions: "After meals with water" },
+  { name: "Paracetamol", defaultDosage: "500 mg", defaultFreq: "1-0-1 (Twice daily)", defaultDuration: "3 days", defaultInstructions: "After meals with water" },
+  { name: "Amoxicillin", defaultDosage: "500 mg", defaultFreq: "1-1-1 (Thrice daily)", defaultDuration: "5 days", defaultInstructions: "After meals" },
   { name: "Cetirizine", defaultDosage: "10 mg", defaultFreq: "0-0-1 (Once at bedtime)", defaultDuration: "5 days", defaultInstructions: "Take at night" },
   { name: "Omeprazole", defaultDosage: "20 mg", defaultFreq: "1-0-0 (Once daily)", defaultDuration: "7 days", defaultInstructions: "30 mins before breakfast" },
   { name: "Azithromycin", defaultDosage: "500 mg", defaultFreq: "1-0-0 (Once daily)", defaultDuration: "3 days", defaultInstructions: "1 hour before food" },
   { name: "Metformin", defaultDosage: "500 mg", defaultFreq: "1-0-1 (Twice daily)", defaultDuration: "30 days", defaultInstructions: "With meals" },
   { name: "Atorvastatin", defaultDosage: "10 mg", defaultFreq: "0-0-1 (Once at night)", defaultDuration: "30 days", defaultInstructions: "At bedtime" },
-  { name: "Ibuprofen", defaultDosage: "400 mg", defaultFreq: "1-0-1 (Twice daily)", defaultDuration: "3 days", defaultInstructions: "Strictly after food" }
+  { name: "Ibuprofen", defaultDosage: "400 mg", defaultFreq: "1-0-1 (Twice daily)", defaultDuration: "3 days", defaultInstructions: "Strictly after meals" }
 ];
 
+// Sample Hospital Patients for Triage Roster
 const INITIAL_PATIENTS = [
   {
     id: "PAT-1001",
@@ -119,10 +139,10 @@ const INITIAL_PATIENTS = [
     prescriptions: [
       {
         id: "RX-103",
-        medicine: "Amoxicillin",
+        medicine: "Paracetamol",
         dosage: "500 mg",
-        frequency: "1-0-1 (Twice daily)",
-        duration: "5 days",
+        frequency: "1-1-1 (Thrice daily)",
+        duration: "3 days",
         instructions: "After meals with water",
         dispensed: true,
         dispensedAt: "10:45 AM"
@@ -131,24 +151,24 @@ const INITIAL_PATIENTS = [
         id: "RX-104",
         medicine: "Cetirizine",
         dosage: "10 mg",
-        frequency: "0-0-1 (Once at bedtime)",
+        frequency: "0-0-1 (Once at night)",
         duration: "5 days",
-        instructions: "Take at night",
-        dispensed: true,
-        dispensedAt: "10:46 AM"
+        instructions: "Take at bedtime",
+        dispensed: false,
+        dispensedAt: null
       }
     ]
   },
   {
     id: "PAT-1003",
-    name: "David Miller",
-    age: 62,
+    name: "Anil Deshmukh",
+    age: 58,
     gender: "Male",
-    contact: "+91 99887 76655",
+    contact: "+91 98220 98765",
     doctor: "doctor1",
     doctorName: "Dr. Rajesh Sharma",
-    symptoms: "Follow-up consultation for routine ECG review",
-    vitals: { bp: "124/80", temp: "98.6 °F", pulse: "70 bpm" },
+    symptoms: "Arrhythmia palpitations and fatigue",
+    vitals: { bp: "142/92", temp: "98.6 °F", pulse: "88 bpm" },
     registeredAt: "08 Sep 2026, 11:00 AM",
     status: "Waiting",
     prescriptions: []
@@ -158,43 +178,47 @@ const INITIAL_PATIENTS = [
     name: "Sneha Reddy",
     age: 34,
     gender: "Female",
-    contact: "+91 91234 56780",
+    contact: "+91 94401 23456",
     doctor: "doctor2",
     doctorName: "Dr. Ananya Patel",
-    symptoms: "Severe acid reflux and morning stomach burn",
-    vitals: { bp: "120/82", temp: "98.2 °F", pulse: "74 bpm" },
-    registeredAt: "08 Sep 2026, 11:20 AM",
-    status: "Waiting",
-    prescriptions: []
+    symptoms: "Acid reflux and recurring gastric distress",
+    vitals: { bp: "120/80", temp: "98.2 °F", pulse: "74 bpm" },
+    registeredAt: "08 Sep 2026, 11:45 AM",
+    status: "Dispensed",
+    prescriptions: [
+      {
+        id: "RX-105",
+        medicine: "Omeprazole",
+        dosage: "20 mg",
+        frequency: "1-0-0 (Once daily)",
+        duration: "7 days",
+        instructions: "30 mins before breakfast",
+        dispensed: true,
+        dispensedAt: "12:15 PM"
+      }
+    ]
   }
 ];
 
 // App State
 let currentUser = null;
-let patients = [];
 let currentTab = "desk";
+let patients = [];
 
+// Filter States
 let receptionSearch = "";
 let receptionStatusFilter = "All";
-
 let pharmaSearch = "";
 let pharmaDoctorFilter = "";
 let pharmaDispenseFilter = "all";
-
 let activeDoctorPrescriptionPatientId = null;
 
-// Initializer
+// Initialization
 function initApp() {
   try {
-    const saved = localStorage.getItem("careconnect_patients");
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      if (Array.isArray(parsed) && parsed.length > 0) {
-        patients = parsed;
-      } else {
-        patients = [...INITIAL_PATIENTS];
-        savePatients(patients);
-      }
+    const savedPatients = localStorage.getItem("careconnect_patients");
+    if (savedPatients) {
+      patients = JSON.parse(savedPatients);
     } else {
       patients = [...INITIAL_PATIENTS];
       savePatients(patients);
@@ -224,22 +248,21 @@ function savePatients(newPatients) {
   }
 }
 
-// Notification Toast
+// Clinical Toast Alert
 function showToast(msg, type = "info") {
   const container = document.getElementById("toastContainer");
   if (!container) return;
 
   const toast = document.createElement("div");
   toast.className = `toast ${type}`;
-  const icon = type === "success" ? "✔" : type === "error" ? "✖" : "ℹ";
-  toast.innerHTML = `<span>${icon}</span> <span>${msg}</span>`;
+  toast.innerHTML = `<span>${type === "success" ? "✔" : type === "error" ? "✖" : "ℹ"}</span> <span>${msg}</span>`;
 
   container.appendChild(toast);
   setTimeout(() => {
     toast.style.opacity = "0";
-    toast.style.transform = "translateY(-10px)";
-    toast.style.transition = "all 0.25s ease";
-    setTimeout(() => toast.remove(), 250);
+    toast.style.transform = "translateY(-8px)";
+    toast.style.transition = "all 0.2s ease";
+    setTimeout(() => toast.remove(), 200);
   }, 3000);
 }
 
@@ -249,7 +272,7 @@ function quickLogin(username) {
   if (user) {
     currentUser = user;
     localStorage.setItem("careconnect_user", JSON.stringify(user));
-    showToast(`Signed in as ${user.name}`, "success");
+    showToast(`Signed in as ${user.name} (${user.role})`, "success");
     renderApp();
   }
 }
@@ -272,7 +295,7 @@ function handleManualLogin(e) {
     showToast(`Welcome back, ${user.name}`, "success");
     renderApp();
   } else {
-    alertBox.textContent = "Invalid credentials or department role mismatch.";
+    alertBox.textContent = "Invalid staff credentials or department role mismatch.";
     alertBox.style.display = "block";
   }
 }
@@ -302,7 +325,7 @@ function togglePasswordVisibility() {
   }
 }
 
-// Master Render Router
+// Master View Router
 function renderApp() {
   const loginView = document.getElementById("loginView");
   const appView = document.getElementById("appView");
@@ -316,14 +339,14 @@ function renderApp() {
   loginView.style.display = "none";
   appView.style.display = "block";
 
-  document.getElementById("userAvatarSmall").textContent = currentUser.avatar || "👤";
+  // Update Header Identity
   document.getElementById("userDisplayName").textContent = currentUser.name || currentUser.username;
-  document.getElementById("userRoleTag").textContent = currentUser.role;
+  document.getElementById("userRoleTag").textContent = currentUser.title || currentUser.role;
 
   const tabDesk = document.getElementById("tabDesk");
   const tabReports = document.getElementById("tabReports");
 
-  tabDesk.textContent = `📊 ${currentUser.role} Desk`;
+  tabDesk.querySelector("span").textContent = `${currentUser.role} Desk`;
 
   if (currentTab === "desk") {
     tabDesk.classList.add("active");
@@ -352,7 +375,7 @@ function renderRoleDesk() {
 }
 
 // ==========================================================================
-// 1. RECEPTIONIST DESK RENDERER
+// 1. RECEPTIONIST DESK (PATIENT INTAKE & ROSTER)
 // ==========================================================================
 function renderReceptionistDesk(container) {
   const waitingCount = patients.filter((p) => p.status === "Waiting").length;
@@ -372,53 +395,53 @@ function renderReceptionistDesk(container) {
 
   container.innerHTML = `
     <div class="desk-container">
-      <!-- Top Symmetrical Stat Cards -->
+      <!-- Hospital Metrics Row -->
       <div class="stats-row">
         <div class="stat-card">
-          <div class="stat-icon-wrapper blue">👥</div>
+          <div class="stat-icon-wrapper teal">${ICONS.user}</div>
           <div class="stat-content">
             <span class="stat-number">${patients.length}</span>
-            <span class="stat-title">Registered Patients</span>
+            <span class="stat-title">Admitted Patients</span>
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon-wrapper yellow">⏳</div>
+          <div class="stat-icon-wrapper amber">${ICONS.clock}</div>
           <div class="stat-content">
-            <span class="stat-number" style="color: var(--amber);">${waitingCount}</span>
+            <span class="stat-number">${waitingCount}</span>
             <span class="stat-title">Awaiting Consultation</span>
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon-wrapper purple">📋</div>
+          <div class="stat-icon-wrapper blue">${ICONS.clipboard}</div>
           <div class="stat-content">
-            <span class="stat-number" style="color: #c084fc;">${prescribedCount}</span>
-            <span class="stat-title">Prescription Ready</span>
+            <span class="stat-number">${prescribedCount}</span>
+            <span class="stat-title">Consulted / Prescribed</span>
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon-wrapper green">✅</div>
+          <div class="stat-icon-wrapper green">${ICONS.check}</div>
           <div class="stat-content">
-            <span class="stat-number" style="color: var(--emerald);">${dispensedCount}</span>
+            <span class="stat-number">${dispensedCount}</span>
             <span class="stat-title">Medicines Dispensed</span>
           </div>
         </div>
       </div>
 
-      <!-- 2-Column Balanced Layout -->
+      <!-- 2-Column Clinical Layout -->
       <div class="reception-grid">
-        <!-- Patient Intake Panel -->
+        <!-- Patient Admission Form -->
         <div class="panel-card">
           <div class="panel-header">
             <div>
-              <h3 class="panel-title">Patient Intake</h3>
-              <p class="panel-subtitle">Register incoming patient into doctor queue</p>
+              <h3 class="panel-title">Patient Intake & Triage</h3>
+              <p class="panel-subtitle">Register new patient & assign clinical queue</p>
             </div>
           </div>
 
           <form id="patientRegForm" onsubmit="handleRegisterPatient(event)" class="form-layout">
             <div class="form-row-2">
               <div class="form-group">
-                <label>Full Name *</label>
+                <label>Patient Full Name *</label>
                 <input type="text" id="regName" class="input-control" placeholder="e.g. Rahul Verma" required />
               </div>
               <div class="form-group">
@@ -437,21 +460,21 @@ function renderReceptionistDesk(container) {
                 </select>
               </div>
               <div class="form-group">
-                <label>Phone *</label>
+                <label>Contact Phone *</label>
                 <input type="text" id="regContact" class="input-control" placeholder="+91 98765 43210" required />
               </div>
             </div>
 
             <div class="form-group">
-              <label>Assigned Consulting Doctor *</label>
-              <select id="regDoctor" class="input-control" style="color: var(--cyan); font-weight: 700;">
+              <label>Consulting Doctor Assignment *</label>
+              <select id="regDoctor" class="input-control" style="color: var(--hospital-teal-hover); font-weight: 600;">
                 ${DOCTORS.map((d) => `<option value="${d.username}">${d.name} — ${d.specialty} (${d.room})</option>`).join("")}
               </select>
             </div>
 
             <div class="form-group">
-              <label>Chief Symptoms / Reason</label>
-              <textarea id="regSymptoms" class="input-control" rows="2" placeholder="e.g. Fever, chest pain, recurring cough..."></textarea>
+              <label>Chief Symptoms / Clinical Concern</label>
+              <textarea id="regSymptoms" class="input-control" rows="2" placeholder="e.g. Mild chest pain, seasonal fever, cough..."></textarea>
             </div>
 
             <div class="form-row-equal">
@@ -460,23 +483,23 @@ function renderReceptionistDesk(container) {
                 <input type="text" id="regBP" class="input-control" placeholder="120/80" value="120/80" />
               </div>
               <div class="form-group">
-                <label>Body Temp (°F)</label>
+                <label>Body Temperature</label>
                 <input type="text" id="regTemp" class="input-control" placeholder="98.6 °F" value="98.6 °F" />
               </div>
             </div>
 
             <button type="submit" class="btn-primary" style="margin-top: 6px;">
-              Register & Queue Patient ➔
+              Queue Patient for Consultation ➔
             </button>
           </form>
         </div>
 
-        <!-- Patient Directory Panel -->
+        <!-- Consultation Queue Stream -->
         <div class="panel-card">
           <div class="panel-header">
             <div>
               <h3 class="panel-title">Consultation Queue</h3>
-              <p class="panel-subtitle">${filtered.length} patient records found</p>
+              <p class="panel-subtitle">${filtered.length} active patient records</p>
             </div>
 
             <div class="filter-tabs">
@@ -491,22 +514,22 @@ function renderReceptionistDesk(container) {
 
           <!-- Search Bar -->
           <div class="search-container">
-            <span class="search-icon-svg">🔍</span>
+            <span class="search-icon-svg">${ICONS.search}</span>
             <input
               type="text"
               class="input-control"
-              placeholder="Search by Patient Name, ID, Phone, or Doctor..."
+              placeholder="Search by patient name, ID, phone, or doctor..."
               value="${receptionSearch}"
               oninput="handleReceptionSearch(this.value)"
             />
             ${receptionSearch ? `<button class="search-clear-btn" onclick="handleReceptionSearch('')">✕</button>` : ""}
           </div>
 
-          <!-- List -->
+          <!-- Stream List -->
           <div class="patient-stream">
             ${
               filtered.length === 0
-                ? `<div class="empty-placeholder"><div class="icon">📂</div><p>No patients match the filter criteria.</p></div>`
+                ? `<div class="empty-placeholder"><div class="empty-icon">${ICONS.clipboard}</div><h3>No Patients Found</h3><p>No records match the search or filter criteria.</p></div>`
                 : filtered
                     .map(
                       (p) => `
@@ -523,24 +546,24 @@ function renderReceptionistDesk(container) {
                 <div class="clinical-summary-box">
                   <div class="clinical-item">
                     <span class="clinical-item-label">Consulting Doctor</span>
-                    <span class="clinical-item-value" style="color: var(--cyan);">🩺 ${p.doctorName || p.doctor}</span>
+                    <span class="clinical-item-value" style="color: var(--hospital-teal-hover); font-weight: 600;">🩺 ${p.doctorName || p.doctor}</span>
                   </div>
                   <div class="clinical-item">
-                    <span class="clinical-item-label">Reported Symptoms</span>
-                    <span class="clinical-item-value">${p.symptoms || "General Checkup"}</span>
+                    <span class="clinical-item-label">Chief Symptoms</span>
+                    <span class="clinical-item-value">${p.symptoms || "Routine Checkup"}</span>
                   </div>
                   <div class="clinical-item">
                     <span class="clinical-item-label">Clinical Vitals</span>
                     <span class="clinical-item-value">BP: ${p.vitals?.bp || "120/80"} | Temp: ${p.vitals?.temp || "98.6°F"}</span>
                   </div>
                   <div class="clinical-item">
-                    <span class="clinical-item-label">Intake Time</span>
+                    <span class="clinical-item-label">Admission Time</span>
                     <span class="clinical-item-value">${p.registeredAt || "Today"}</span>
                   </div>
                 </div>
 
                 <div class="patient-record-footer">
-                  <span style="color: var(--text-secondary); font-weight: 600;">💊 ${(p.prescriptions || []).length} Prescriptions Logged</span>
+                  <span style="color: var(--text-muted); font-weight: 500;">Prescriptions: ${(p.prescriptions || []).length} items</span>
                   <button class="btn-remove-patient" onclick="deletePatient('${p.id}', '${p.name}')">Remove</button>
                 </div>
               </div>
@@ -592,15 +615,15 @@ function handleRegisterPatient(e) {
 
   const updated = [newPatient, ...patients];
   savePatients(updated);
-  showToast(`Patient ${name} (${newId}) queued successfully`, "success");
+  showToast(`Patient ${name} (${newId}) admitted to queue`, "success");
   renderRoleDesk();
 }
 
 function deletePatient(id, name) {
-  if (confirm(`Remove patient ${name} (${id})?`)) {
+  if (confirm(`Remove admission record for ${name} (${id})?`)) {
     const updated = patients.filter((p) => p.id !== id);
     savePatients(updated);
-    showToast(`Removed patient ${name}`, "info");
+    showToast(`Removed patient record ${name}`, "info");
     renderRoleDesk();
   }
 }
@@ -616,7 +639,7 @@ function handleReceptionSearch(val) {
 }
 
 // ==========================================================================
-// 2. DOCTOR DESK RENDERER
+// 2. DOCTOR DESK (CLINICAL CONSULTATION)
 // ==========================================================================
 function renderDoctorDesk(container) {
   const assigned = patients.filter(
@@ -628,10 +651,12 @@ function renderDoctorDesk(container) {
     <div class="desk-container">
       <!-- Doctor Hero Card -->
       <div class="doctor-hero">
-        <div class="doc-avatar-circle">${currentUser.avatar || "👨‍⚕️"}</div>
-        <div class="doc-meta-info">
-          <h2>${currentUser.name}</h2>
-          <p>${currentUser.title} • Active Consultation Desk</p>
+        <div class="doc-info-block">
+          <div class="doc-avatar-circle">${ICONS.doctor}</div>
+          <div class="doc-meta-info">
+            <h2>${currentUser.name}</h2>
+            <p>${currentUser.title} • Active Clinical Workstation</p>
+          </div>
         </div>
         <div style="display: flex; gap: 12px;">
           <div class="doc-queue-pill">
@@ -646,14 +671,17 @@ function renderDoctorDesk(container) {
       </div>
 
       <div class="panel-header" style="margin-bottom: 20px;">
-        <h3 class="panel-title">Assigned Patient Queue</h3>
-        <span class="system-tag">${assigned.length} In Queue</span>
+        <div>
+          <h3 class="panel-title">Assigned Patients Roster</h3>
+          <p class="panel-subtitle">Review vitals, diagnose symptoms, and prescribe treatment</p>
+        </div>
+        <span class="system-tag">${assigned.length} Patients in Queue</span>
       </div>
 
       <div>
         ${
           assigned.length === 0
-            ? `<div class="empty-placeholder"><div class="icon">📭</div><h3>No Patients Assigned Yet</h3><p>Your consultation queue is clear.</p></div>`
+            ? `<div class="empty-placeholder"><div class="empty-icon">${ICONS.clipboard}</div><h3>No Patients Assigned</h3><p>Your consultation queue is clear at this time.</p></div>`
             : assigned
                 .map((p) => {
                   const isDrawerOpen = activeDoctorPrescriptionPatientId === p.id;
@@ -663,57 +691,57 @@ function renderDoctorDesk(container) {
             <div class="doctor-patient-card">
               <div class="panel-header">
                 <div>
-                  <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 3px;">
+                  <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 4px;">
                     <span class="patient-id-tag">${p.id}</span>
                     <span class="status-badge ${(p.status || "waiting").toLowerCase()}">${p.status || "Waiting"}</span>
                   </div>
-                  <h3 style="font-size: 18px; font-weight: 700; color: #fff;">${p.name}</h3>
-                  <p style="font-size: 12px; color: var(--text-secondary);">Age: ${p.age} | ${p.gender || "Patient"} | 📞 ${p.contact}</p>
+                  <h3 style="font-size: 16px; font-weight: 600; color: var(--text-title);">${p.name}</h3>
+                  <p style="font-size: 12px; color: var(--text-muted);">${p.age} yrs • ${p.gender || "Patient"} • 📞 ${p.contact}</p>
                 </div>
 
                 <div class="action-row">
                   ${
                     p.status !== "Completed"
-                      ? `<button class="btn-mark-consult-done" onclick="markPatientComplete('${p.id}')">✓ Mark Completed</button>`
+                      ? `<button class="btn-mark-consult-done" onclick="markPatientComplete('${p.id}')">✔ Complete Visit</button>`
                       : ""
                   }
                   <button class="btn-rx-action" onclick="toggleDoctorRxDrawer('${p.id}')">
-                    ${isDrawerOpen ? "✕ Close Prescription Form" : "💊 Prescribe Medication"}
+                    ${isDrawerOpen ? "✕ Close Rx Pad" : "💊 Prescribe Medication"}
                   </button>
                 </div>
               </div>
 
-              <!-- Vitals Summary Strip -->
+              <!-- Vitals Summary -->
               <div class="clinical-summary-box">
                 <div class="clinical-item">
                   <span class="clinical-item-label">Chief Symptoms</span>
-                  <span class="clinical-item-value" style="color: #fbbf24;">${p.symptoms || "None reported"}</span>
+                  <span class="clinical-item-value" style="color: var(--badge-waiting-text); font-weight: 600;">${p.symptoms || "None reported"}</span>
                 </div>
                 <div class="clinical-item">
-                  <span class="clinical-item-label">Vitals</span>
+                  <span class="clinical-item-label">Recorded Vitals</span>
                   <span class="clinical-item-value">BP: ${p.vitals?.bp || "120/80"} | Temp: ${p.vitals?.temp || "98.6°F"}</span>
                 </div>
                 <div class="clinical-item">
-                  <span class="clinical-item-label">Intake Logged</span>
+                  <span class="clinical-item-label">Admission Logged</span>
                   <span class="clinical-item-value">${p.registeredAt || "Today"}</span>
                 </div>
                 <div class="clinical-item">
-                  <span class="clinical-item-label">Status</span>
+                  <span class="clinical-item-label">Current Status</span>
                   <span class="clinical-item-value">${p.status}</span>
                 </div>
               </div>
 
-              <!-- Prescription Drawer -->
+              <!-- Prescription Drawer Form -->
               ${
                 isDrawerOpen
                   ? `
                 <div class="rx-drawer-card">
-                  <h4 class="rx-drawer-heading">Write Prescription for ${p.name}</h4>
+                  <h4 class="rx-drawer-heading">Prescription Pad: ${p.name} (${p.id})</h4>
 
                   <div style="margin-bottom: 12px;">
-                    <label style="font-size: 11px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Quick Formulary Select:</label>
-                    <select class="input-control" style="color: var(--cyan); font-weight: 700; margin-top: 4px;" onchange="handleSelectCatalogMed(this.value)">
-                      <option value="">-- Choose from Catalog or Type Manually Below --</option>
+                    <label style="font-size: 11px; font-weight: 600; color: var(--hospital-teal-hover); text-transform: uppercase; letter-spacing: 0.03em;">Select from Hospital Formulary:</label>
+                    <select class="input-control" style="color: var(--hospital-teal-hover); font-weight: 600; margin-top: 4px;" onchange="handleSelectCatalogMed(this.value)">
+                      <option value="">-- Choose Medication from Catalog or Type Below --</option>
                       ${COMMON_MEDICINES.map((m) => `<option value="${m.name}">${m.name} (${m.defaultDosage}, ${m.defaultFreq})</option>`).join("")}
                     </select>
                   </div>
@@ -744,10 +772,10 @@ function renderDoctorDesk(container) {
                     </div>
 
                     <div style="display: flex; gap: 10px; margin-top: 6px;">
-                      <button type="submit" class="btn-primary" style="background: var(--emerald); padding: 8px 18px; border-radius: var(--radius-full); font-size: 13px;">
-                        ✓ Save & Forward to Dispensary
+                      <button type="submit" class="btn-primary" style="padding: 8px 18px; font-size: 12.5px;">
+                        ✔ Save & Send to Dispensary
                       </button>
-                      <button type="button" class="btn-logout" style="border-color: var(--border-color); color: var(--text-secondary);" onclick="toggleDoctorRxDrawer('${p.id}')">
+                      <button type="button" class="btn-logout" onclick="toggleDoctorRxDrawer('${p.id}')">
                         Cancel
                       </button>
                     </div>
@@ -758,11 +786,11 @@ function renderDoctorDesk(container) {
               }
 
               <!-- Prescription List -->
-              <div style="border-top: 1px solid var(--border-color); padding-top: 14px; margin-top: 12px;">
-                <span style="font-size: 11px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.04em;">Medications Prescribed (${rxList.length}):</span>
+              <div style="border-top: 1px solid var(--border-light); padding-top: 14px; margin-top: 12px;">
+                <span style="font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em;">Active Prescriptions (${rxList.length}):</span>
                 ${
                   rxList.length === 0
-                    ? `<p style="font-size: 12px; color: var(--text-muted); font-style: italic; margin-top: 6px;">No medications prescribed yet.</p>`
+                    ? `<p style="font-size: 12px; color: var(--text-caption); font-style: italic; margin-top: 6px;">No medications prescribed yet.</p>`
                     : `
                   <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; margin-top: 8px;">
                     ${rxList
@@ -770,13 +798,15 @@ function renderDoctorDesk(container) {
                         (rx, idx) => `
                       <div class="rx-item-tile">
                         <div class="rx-item-header">
-                          <span style="font-size: 10px; font-weight: 800; color: var(--cyan); font-family: monospace;">RX #${idx + 1}</span>
+                          <span style="font-size: 10.5px; font-weight: 700; color: var(--hospital-teal-hover); font-family: monospace;">RX #${idx + 1}</span>
                           <span class="rx-tag-pill ${rx.dispensed ? "done" : "wait"}">${rx.dispensed ? "✔ Dispensed" : "⏳ Pending"}</span>
                         </div>
-                        <h5 style="font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 2px;">${rx.medicine} <span style="font-size: 12px; color: var(--text-secondary); font-weight: 400;">(${rx.dosage})</span></h5>
-                        <p style="font-size: 12px; color: var(--text-primary); margin-bottom: 2px;">📅 ${rx.frequency} • ${rx.duration}</p>
-                        <p style="font-size: 11px; color: var(--text-secondary); margin-bottom: 8px;">ℹ️ ${rx.instructions || "As directed"}</p>
-                        <button style="background: none; border: none; color: var(--rose); font-size: 11px; cursor: pointer; font-weight: 700;" onclick="deletePrescription('${p.id}', '${rx.id}')">✕ Remove</button>
+                        <div style="font-size: 13.5px; font-weight: 600; color: var(--text-title); margin-bottom: 2px;">
+                          ${rx.medicine} <span style="font-size: 12px; color: var(--text-muted); font-weight: 500;">(${rx.dosage})</span>
+                        </div>
+                        <p style="font-size: 12px; color: var(--text-body); margin-bottom: 2px;">${rx.frequency} • ${rx.duration}</p>
+                        <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px;">Directions: ${rx.instructions || "As directed"}</p>
+                        <button style="background: none; border: none; color: var(--badge-danger-text); font-size: 11px; cursor: pointer; font-weight: 600;" onclick="deletePrescription('${p.id}', '${rx.id}')">✕ Remove</button>
                       </div>
                     `
                       )
@@ -849,7 +879,7 @@ function handleSavePrescription(e, patientId) {
 
   savePatients(updated);
   activeDoctorPrescriptionPatientId = null;
-  showToast(`Prescription for ${med} saved`, "success");
+  showToast(`Prescription for ${med} saved and forwarded`, "success");
   renderRoleDesk();
 }
 
@@ -881,7 +911,7 @@ function markPatientComplete(patientId) {
 }
 
 // ==========================================================================
-// 3. PHARMACIST DESK RENDERER
+// 3. PHARMACIST DESK (DISPENSARY)
 // ==========================================================================
 function renderPharmacistDesk(container) {
   const uniqueDocs = [...new Set(patients.map((p) => p.doctorName || p.doctor).filter(Boolean))];
@@ -923,26 +953,26 @@ function renderPharmacistDesk(container) {
 
   container.innerHTML = `
     <div class="desk-container">
-      <!-- 3 Metrics Cards -->
+      <!-- Metrics Cards -->
       <div class="stats-row" style="grid-template-columns: repeat(3, 1fr);">
         <div class="stat-card">
-          <div class="stat-icon-wrapper blue">💊</div>
+          <div class="stat-icon-wrapper blue">${ICONS.pill}</div>
           <div class="stat-content">
             <span class="stat-number">${totalPrescribed}</span>
             <span class="stat-title">Prescriptions Logged</span>
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon-wrapper yellow">⏳</div>
+          <div class="stat-icon-wrapper amber">${ICONS.clock}</div>
           <div class="stat-content">
-            <span class="stat-number" style="color: var(--amber);">${totalPending}</span>
-            <span class="stat-title">Awaiting Dispense</span>
+            <span class="stat-number">${totalPending}</span>
+            <span class="stat-title">Awaiting Fulfillment</span>
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon-wrapper green">✅</div>
+          <div class="stat-icon-wrapper green">${ICONS.check}</div>
           <div class="stat-content">
-            <span class="stat-number" style="color: var(--emerald);">${totalDispensed}</span>
+            <span class="stat-number">${totalDispensed}</span>
             <span class="stat-title">Dispensed Items</span>
           </div>
         </div>
@@ -951,7 +981,7 @@ function renderPharmacistDesk(container) {
       <!-- Controls Bar -->
       <div class="pharma-bar">
         <div class="search-container" style="margin-bottom: 0; min-width: 280px; flex: 1;">
-          <span class="search-icon-svg">🔍</span>
+          <span class="search-icon-svg">${ICONS.search}</span>
           <input
             type="text"
             class="input-control"
@@ -963,7 +993,7 @@ function renderPharmacistDesk(container) {
         </div>
 
         <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-          <select class="input-control" style="color: var(--cyan); font-weight: 700; width: auto; border-radius: var(--radius-full);" onchange="handlePharmaDocFilter(this.value)">
+          <select class="input-control" style="color: var(--hospital-teal-hover); font-weight: 600; width: auto;" onchange="handlePharmaDocFilter(this.value)">
             <option value="">All Consulting Doctors</option>
             ${uniqueDocs.map((doc) => `<option value="${doc}" ${pharmaDoctorFilter === doc ? "selected" : ""}>${doc}</option>`).join("")}
           </select>
@@ -976,11 +1006,11 @@ function renderPharmacistDesk(container) {
         </div>
       </div>
 
-      <!-- Patient Cards with Clean Data Tables -->
+      <!-- Dispensary Records Table -->
       <div>
         ${
           filtered.length === 0
-            ? `<div class="empty-placeholder"><div class="icon">📦</div><h3>No Prescriptions Match Filter</h3><p>Try resetting filters or search keyword.</p></div>`
+            ? `<div class="empty-placeholder"><div class="empty-icon">${ICONS.pill}</div><h3>No Prescriptions Found</h3><p>Try resetting the search keyword or doctor filter.</p></div>`
             : filtered
                 .map((patient) => {
                   const rxList = patient.prescriptions || [];
@@ -992,17 +1022,17 @@ function renderPharmacistDesk(container) {
               <div class="panel-header">
                 <div>
                   <span class="patient-id-tag">${patient.id}</span>
-                  <h4 style="font-size: 18px; font-weight: 700; color: #fff; margin-top: 2px;">${patient.name}</h4>
-                  <span style="font-size: 12px; color: var(--text-secondary);">Age: ${patient.age} • 📞 ${patient.contact} • 🩺 ${patient.doctorName || patient.doctor}</span>
+                  <h4 style="font-size: 16px; font-weight: 600; color: var(--text-title); margin-top: 2px;">${patient.name}</h4>
+                  <span style="font-size: 12px; color: var(--text-muted);">${patient.age} yrs • 📞 ${patient.contact} • 🩺 ${patient.doctorName || patient.doctor}</span>
                 </div>
 
                 <div style="display: flex; align-items: center; gap: 10px;">
                   <span class="status-badge ${allDispensed ? "dispensed" : hasPending ? "waiting" : "default"}">
-                    ${allDispensed ? "✓ Fully Dispensed" : hasPending ? "⏳ Dispense Pending" : "No Rx"}
+                    ${allDispensed ? "✔ Fully Dispensed" : hasPending ? "⏳ Dispense Pending" : "No Rx"}
                   </span>
                   ${
                     hasPending
-                      ? `<button class="btn-bulk-dispense" onclick="dispenseAllForPatient('${patient.id}')">✓ Dispense All</button>`
+                      ? `<button class="btn-bulk-dispense" onclick="dispenseAllForPatient('${patient.id}')">✔ Dispense All</button>`
                       : ""
                   }
                 </div>
@@ -1019,7 +1049,7 @@ function renderPharmacistDesk(container) {
                         <th>Medication</th>
                         <th>Frequency & Duration</th>
                         <th>Clinical Directions</th>
-                        <th>Dispense Status</th>
+                        <th>Status</th>
                         <th style="text-align: right;">Action</th>
                       </tr>
                     </thead>
@@ -1027,21 +1057,21 @@ function renderPharmacistDesk(container) {
                       ${rxList
                         .map(
                           (rx) => `
-                        <tr style="${rx.dispensed ? "background: rgba(16, 185, 129, 0.04);" : ""}">
+                        <tr style="${rx.dispensed ? "background-color: var(--hospital-teal-light);" : ""}">
                           <td>
-                            <strong style="color: #ffffff; font-size: 13px;">${rx.medicine}</strong>
-                            <span style="display: block; font-size: 11px; color: var(--cyan); font-weight: 700;">${rx.dosage}</span>
+                            <strong style="color: var(--text-title); font-size: 13px;">${rx.medicine}</strong>
+                            <span style="display: block; font-size: 11px; color: var(--hospital-teal-hover); font-weight: 600;">${rx.dosage}</span>
                           </td>
                           <td>
-                            <span style="display: block; font-size: 12px; color: var(--text-primary); font-weight: 600;">${rx.frequency}</span>
-                            <span style="font-size: 11px; color: var(--text-secondary);">${rx.duration}</span>
+                            <span style="display: block; font-size: 12px; color: var(--text-body); font-weight: 500;">${rx.frequency}</span>
+                            <span style="font-size: 11px; color: var(--text-muted);">${rx.duration}</span>
                           </td>
-                          <td style="color: var(--text-secondary); font-size: 12px;">${rx.instructions || "As instructed"}</td>
+                          <td style="color: var(--text-muted); font-size: 12px;">${rx.instructions || "As instructed"}</td>
                           <td>
                             ${
                               rx.dispensed
-                                ? `<span style="color: var(--emerald); font-size: 11px; font-weight: 700;">✔ Dispensed ${rx.dispensedAt ? `(${rx.dispensedAt})` : ""}</span>`
-                                : `<span style="color: var(--amber); font-size: 11px; font-weight: 700;">⏳ Awaiting Dispense</span>`
+                                ? `<span style="color: var(--badge-dispensed-text); font-size: 11.5px; font-weight: 600;">✔ Dispensed ${rx.dispensedAt ? `(${rx.dispensedAt})` : ""}</span>`
+                                : `<span style="color: var(--badge-waiting-text); font-size: 11.5px; font-weight: 600;">⏳ Awaiting Dispense</span>`
                             }
                           </td>
                           <td style="text-align: right;">
@@ -1049,7 +1079,7 @@ function renderPharmacistDesk(container) {
                               class="btn-disp-action ${rx.dispensed ? "undo" : "mark"}"
                               onclick="toggleDispensedStatus('${patient.id}', '${rx.id}')"
                             >
-                              ${rx.dispensed ? "↺ Undo" : "✓ Mark Dispensed"}
+                              ${rx.dispensed ? "↺ Undo" : "✔ Mark Dispensed"}
                             </button>
                           </td>
                         </tr>
@@ -1143,7 +1173,7 @@ function setPharmaDispenseFilter(val) {
 }
 
 // ==========================================================================
-// 4. REPORTS & ANALYTICS RENDERER
+// 4. REPORTS & OPERATIONAL ANALYTICS
 // ==========================================================================
 function renderReports() {
   const container = document.getElementById("reportsSection");
@@ -1189,54 +1219,57 @@ function renderReports() {
     <div class="desk-container">
       <div class="reports-header-box">
         <div>
-          <h2 style="font-size: 22px; font-weight: 800; color: #fff;">Hospital Operational Analytics</h2>
-          <p style="color: var(--text-secondary); font-size: 13px;">Real-time metrics across Front Desk, Consultation, and Dispensary</p>
+          <h2 style="font-size: 20px; font-weight: 700; color: var(--text-title);">Hospital Operational Analytics</h2>
+          <p style="color: var(--text-muted); font-size: 12.5px;">Real-time metrics across Front Desk Intake, Consultation, and Dispensary</p>
         </div>
-        <button class="btn-print-action" onclick="window.print()">🖨️ Print / Save PDF</button>
+        <button class="btn-print-action" onclick="window.print()">
+          ${ICONS.printer}
+          <span>Print / Save PDF</span>
+        </button>
       </div>
 
       <!-- Stat Cards -->
       <div class="stats-row">
         <div class="stat-card">
-          <div class="stat-icon-wrapper blue">👥</div>
+          <div class="stat-icon-wrapper teal">${ICONS.user}</div>
           <div class="stat-content">
             <span class="stat-number">${totalPatients}</span>
-            <span class="stat-title">Total Patients</span>
+            <span class="stat-title">Admitted Patients</span>
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon-wrapper yellow">⏳</div>
+          <div class="stat-icon-wrapper amber">${ICONS.clock}</div>
           <div class="stat-content">
-            <span class="stat-number" style="color: var(--amber);">${waitingCount}</span>
+            <span class="stat-number">${waitingCount}</span>
             <span class="stat-title">Waiting Queue</span>
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon-wrapper purple">💊</div>
+          <div class="stat-icon-wrapper blue">${ICONS.pill}</div>
           <div class="stat-content">
             <span class="stat-number">${totalRx}</span>
-            <span class="stat-title">Total Prescriptions</span>
+            <span class="stat-title">Prescriptions Issued</span>
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon-wrapper green">✅</div>
+          <div class="stat-icon-wrapper green">${ICONS.check}</div>
           <div class="stat-content">
-            <span class="stat-number" style="color: var(--emerald);">${totalDisp} (${rate}%)</span>
+            <span class="stat-number">${totalDisp} (${rate}%)</span>
             <span class="stat-title">Dispensed Items</span>
           </div>
         </div>
       </div>
 
-      <!-- Progress Track -->
+      <!-- Pharmacy Fulfillment Track -->
       <div class="progress-card">
-        <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; margin-bottom: 6px;">
-          <span>Pharmacy Fulfillment Rate</span>
-          <span style="color: var(--emerald);">${rate}% Fulfilled</span>
+        <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; margin-bottom: 6px;">
+          <span style="color: var(--text-title);">Pharmacy Fulfillment Rate</span>
+          <span style="color: var(--badge-dispensed-text);">${rate}% Fulfilled</span>
         </div>
         <div class="progress-track">
           <div class="progress-indicator" style="width: ${rate}%;"></div>
         </div>
-        <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--text-secondary); font-weight: 600;">
+        <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); font-weight: 500;">
           <span>${totalDisp} Prescriptions Dispensed</span>
           <span>${totalRx - totalDisp} Pending in Dispensary</span>
         </div>
@@ -1255,8 +1288,8 @@ function renderReports() {
               <div class="doctor-bar-card">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
                   <div>
-                    <strong style="color: #ffffff; font-size: 13px;">${doc.name}</strong>
-                    <span style="display: block; font-size: 11px; color: var(--text-secondary);">${doc.specialty}</span>
+                    <strong style="color: var(--text-title); font-size: 13px;">${doc.name}</strong>
+                    <span style="display: block; font-size: 11px; color: var(--text-muted);">${doc.specialty}</span>
                   </div>
                   <span class="system-tag">${doc.patients} Patients • ${doc.rx} Rx</span>
                 </div>
@@ -1293,7 +1326,7 @@ function renderReports() {
                       const mRate = m.count > 0 ? Math.round((m.dispensed / m.count) * 100) : 0;
                       return `
                       <tr>
-                        <td><strong style="color: #ffffff;">${m.name}</strong></td>
+                        <td><strong style="color: var(--text-title);">${m.name}</strong></td>
                         <td>${m.count}</td>
                         <td>${m.dispensed}</td>
                         <td>
@@ -1314,4 +1347,5 @@ function renderReports() {
   `;
 }
 
+// Attach Bootstrap
 window.addEventListener("DOMContentLoaded", initApp);
