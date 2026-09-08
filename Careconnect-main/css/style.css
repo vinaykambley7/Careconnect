@@ -173,6 +173,16 @@ button, input, select, textarea {
   margin-bottom: 22px;
 }
 
+.login-logo {
+  max-width: 130px;
+  height: auto;
+  max-height: 60px;
+  object-fit: contain;
+  margin-bottom: 8px;
+  border-radius: var(--radius-sm);
+  filter: drop-shadow(0 4px 10px rgba(11, 31, 56, 0.15));
+}
+
 .brand-crest {
   width: 56px;
   height: 56px;
@@ -529,6 +539,16 @@ button, input, select, textarea {
   align-items: center;
   gap: 12px;
   cursor: pointer;
+}
+
+.brand-logo-small {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
+  border-radius: var(--radius-xs);
+  background: #ffffff;
+  padding: 2px 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
 .brand-icon {
